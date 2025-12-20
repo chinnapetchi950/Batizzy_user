@@ -22,7 +22,7 @@ import baseURL from '../../helper/ApiConstant';
 import {useFocusEffect} from '@react-navigation/native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useLanguage} from '../../context/LanguageContext';
+// import {useLanguage} from '../../context/LanguageContext';
 import Loader from '../../common/Loader';
 import {navigate} from '../../navigation/rootNavigator';
 import {showMessage} from 'react-native-flash-message';
@@ -33,7 +33,7 @@ const SettingScreen = props => {
   const [storedLanguage, setStoredLanguage] = useState({});
   const [userData, setUserData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const {selectedLanguage, changeLanguage} = useLanguage();
+  // const {selectedLanguage, changeLanguage} = useLanguage();
 
   const gotoChangePasswordScreen = () => {
     props.navigation.navigate(routes.ChangePasswordScreen);
@@ -91,7 +91,7 @@ const SettingScreen = props => {
     setStoredLanguage({image: image, text: value});
     await AsyncStorage.setItem('Language', JSON.stringify(code));
     updateLanguageCode(code);
-    changeLanguage(code);
+    // changeLanguage(code);
     dropdownRef.current.hide();
   };
 

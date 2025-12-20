@@ -24,7 +24,7 @@ import baseURL from '../helper/ApiConstant';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import Loader from '../common/Loader';
-import {useLanguage} from '../context/LanguageContext';
+// import {useLanguage} from '../context/LanguageContext';
 import {showMessage} from 'react-native-flash-message';
 
 const GovHelp = () => {
@@ -35,7 +35,7 @@ const GovHelp = () => {
   const [token, setToken] = useState();
   const [helpData, setHelpData] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
-  const {selectedLanguage, changeLanguage} = useLanguage();
+  // const {selectedLanguage, changeLanguage} = useLanguage();
 
   useEffect(() => {
     gotosaveToken();
@@ -89,11 +89,11 @@ const GovHelp = () => {
             <View style={[styles.bullets]} />
             <View>
               <Text style={[styles.questionText]}>
-                {selectedLanguage == 'fr'
+                {/* {selectedLanguage == 'fr'
                   ? item.title_fr
                   : selectedLanguage == 'de'
                   ? item.title_de
-                  : item.title}
+                  : item.title} */}
               </Text>
             </View>
           </View>
@@ -105,11 +105,11 @@ const GovHelp = () => {
         </View>
         <View>
           <Text style={[styles.answerText]}>
-            {selectedLanguage == 'fr'
+            {/* {selectedLanguage == 'fr'
               ? item.description_fr
               : selectedLanguage == 'de'
               ? item.description_de
-              : item.description}
+              : item.description} */}
           </Text>
         </View>
       </View>

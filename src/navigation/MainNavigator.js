@@ -15,11 +15,11 @@ import MarketPlace from '../screens/BottomTabScreen/MarketPlace';
 import NewListing from '../screens/BottomTabScreen/MarketPlace/NewListing';
 import Category from '../screens/BottomTabScreen/MarketPlace/Category';
 import MarketplaceAccount from '../screens/BottomTabScreen/MarketPlace/MarketplaceAccount';
-import MarketplaceProfile from '../screens/BottomTabScreen/MarketPlace/MarketplaceProfile';
+// import MarketplaceProfile from '../screens/BottomTabScreen/MarketPlace/MarketplaceProfile';
 import ProductDetails from '../screens/BottomTabScreen/MarketPlace/ProductDetails';
 import EditLocation from '../screens/BottomTabScreen/EditLocation';
 import Profile from '../screens/Profile';
-import ItemBuy from '../screens/BottomTabScreen/MarketPlace/MarketplaceAccount/ItemBuy';
+// import ItemBuy from '../screens/BottomTabScreen/MarketPlace/MarketplaceAccount/ItemBuy';
 import YourListings from '../screens/BottomTabScreen/MarketPlace/MarketplaceAccount/YourListings';
 import FollowersList from '../screens/BottomTabScreen/MarketPlace/FollowersList';
 import FollowingList from '../screens/BottomTabScreen/MarketPlace/FollowingList';
@@ -42,7 +42,7 @@ import AcceptedRequestDetails from '../screens/RequestsScreen/AcceptedRequestDet
 import ChatScreen from '../screens/chat/ChatScreen';
 import InboxScreen from '../screens/chat/InboxScreen';
 import MessageScreen from '../screens/chat/MessageScreen';
-import UnreadScreen from '../screens/chat/UnreadScreen';
+// import UnreadScreen from '../screens/chat/UnreadScreen';
 import EditProfileScreen from '../screens/Profile/EditProfileScreen';
 import AboutScreen from '../screens/Profile/AboutScreen';
 import HelpScreen from '../screens/Profile/HelpScreen';
@@ -80,13 +80,13 @@ const MainNavigator = () => {
           name={routes.MarketplaceAccount}
           component={MarketplaceAccount}
         />
-        <Stack.Screen
-          name={routes.MarketplaceProfile}
+        {/* //<Stack.Screen
+          name={routes.MarketplaceProfile}rr
           component={MarketplaceProfile}
-        />
+        />// */}
         <Stack.Screen name={routes.ProductDetails} component={ProductDetails} />
         <Stack.Screen name={routes.EditLocation} component={EditLocation} />
-        <Stack.Screen name={routes.ItemBuy} component={ItemBuy} />
+        {/* <Stack.Screen name={routes.ItemBuy} component={ItemBuy} /> */}
         <Stack.Screen name={routes.YourListings} component={YourListings} />
         <Stack.Screen name={routes.FollowersList} component={FollowersList} />
         <Stack.Screen name={routes.FollowingList} component={FollowingList} />
@@ -125,8 +125,7 @@ const MainNavigator = () => {
         />
         <Stack.Screen name={routes.ChatScreen} component={ChatScreen} />
         <Stack.Screen name={routes.InboxScreen} component={InboxScreen} />
-        <Stack.Screen name={routes.UnreadScreen} component={UnreadScreen} />
-        <Stack.Screen name={routes.MessageScreen} component={MessageScreen} />
+       <Stack.Screen name={routes.MessageScreen} component={MessageScreen} />
         <Stack.Screen
           name={routes.EditProfileScreen}
           component={EditProfileScreen}

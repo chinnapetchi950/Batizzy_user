@@ -39,7 +39,7 @@ import Colors from '../../helper/Colors';
 import Input from '../../common/Input';
 import FontFamily from '../../helper/FontFamily';
 import Loader from '../../common/Loader';
-import {useLanguage} from '../../context/LanguageContext';
+// import {useLanguage} from '../../context/LanguageContext';
 
 const PostRequest = () => {
   const {t} = useTranslation();
@@ -80,7 +80,7 @@ const PostRequest = () => {
   const [displaySkillName, setDisplaySkillName] = useState(
     t('postrequest.skillsRequiredpl'),
   );
-  const {selectedLanguage, changeLanguage} = useLanguage();
+  // const {selectedLanguage, changeLanguage} = useLanguage();
 
   const scopes = [
     {
@@ -1001,11 +1001,11 @@ const PostRequest = () => {
                           <>
                             <View key={index} style={styles.selectedSkill}>
                               <Text style={styles.selectedSkillText}>
-                                {selectedLanguage == 'fr'
+                                {/* {selectedLanguage == 'fr'
                                   ? skill?.name_fr
                                   : selectedLanguage == 'de'
                                   ? skill?.name_de
-                                  : skill?.name}
+                                  : skill?.name} */}
                               </Text>
                             </View>
                             <Pressable onPress={() => removeSkill(skill)}>
@@ -1028,11 +1028,11 @@ const PostRequest = () => {
                           style={styles.popularSkill}
                           onPress={() => addSkill(skill)}>
                           <Text style={styles.popularSkillText}>
-                            {selectedLanguage == 'fr'
+                            {/* {selectedLanguage == 'fr'
                               ? skill?.name_fr
                               : selectedLanguage == 'de'
                               ? skill?.name_de
-                              : skill?.name}
+                              : skill?.name} */}
                           </Text>
                           <Image
                             source={icons.addIcon}

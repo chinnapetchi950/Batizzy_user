@@ -27,7 +27,7 @@ import Colors from '../../helper/Colors';
 import FontFamily from '../../helper/FontFamily';
 import Icons from '../../common/Icons';
 import LanguageData from '../../i18n/LanguageData';
-import {useLanguage} from '../../context/LanguageContext';
+// import {useLanguage} from '../../context/LanguageContext';
 import Loader from '../../common/Loader';
 import {CommonActions} from '@react-navigation/native';
 
@@ -41,7 +41,7 @@ const Login = () => {
   const [isPassword, setIsPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [storedLanguage, setStoredLanguage] = useState({});
-  const {selectedLanguage, changeLanguage} = useLanguage();
+  // const {selectedLanguage, changeLanguage} = useLanguage();
 
   const UserLogin = async () => {
     const deviceToken = await AsyncStorage.getItem('deviceToken');
@@ -125,7 +125,7 @@ const Login = () => {
 
   const onSelectLanguage = async (index, value, image, code) => {
     setStoredLanguage({image: image, text: value});
-    changeLanguage(code);
+    // changeLanguage(code);
     dropdownRef.current.hide();
   };
 

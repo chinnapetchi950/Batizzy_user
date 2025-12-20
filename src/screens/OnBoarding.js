@@ -65,7 +65,7 @@ const OnBoarding = ({navigation}) => {
 
       <View style={styles.dotBottomView}>
         <View style={styles.dotContainer}>
-          {onboardData.titles.map((_, index) => (
+          {onboardData?.titles?.map((_, index) => (
             <View
               key={index}
               style={[

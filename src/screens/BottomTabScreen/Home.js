@@ -32,7 +32,7 @@ import axios from 'axios';
 import Icons from '../../common/Icons';
 import moment from 'moment';
 import LanguageData from '../../i18n/LanguageData';
-import {useLanguage} from '../../context/LanguageContext';
+// import {useLanguage} from '../../context/LanguageContext';
 import Loader from '../../common/Loader';
 import {showMessage} from 'react-native-flash-message';
 
@@ -48,7 +48,7 @@ const Home = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [bannerData, setBannerData] = useState(bannerDummyData);
   const [activeSlide, setActiveSlide] = useState(0);
-  const {selectedLanguage, changeLanguage} = useLanguage();
+  // const {selectedLanguage, changeLanguage} = useLanguage();
 
   const bannerDummyData = [
     {
@@ -84,7 +84,7 @@ const Home = () => {
 
   const getLanguageCode = async () => {
     var LanguageCode = JSON.parse(await AsyncStorage.getItem('Language'));
-    changeLanguage(LanguageCode);
+    // changeLanguage(LanguageCode);
     if (LanguageCode != null) {
       updateLanguageCode(LanguageCode);
     }
@@ -140,7 +140,7 @@ const Home = () => {
         const selectedCodeLang = LanguageData.find(
           lang => lang.code === response.data.data.lang,
         );
-        changeLanguage(selectedCodeLang?.code);
+        // changeLanguage(selectedCodeLang?.code);
         setStoredLanguage(selectedCodeLang);
       })
       .catch(error => {
@@ -284,7 +284,7 @@ const Home = () => {
     setStoredLanguage({image: image, text: value});
     await AsyncStorage.setItem('Language', JSON.stringify(code));
     updateLanguageCode(code);
-    changeLanguage(code);
+    // changeLanguage(code);
     dropdownRef.current.hide();
   };
 
@@ -307,9 +307,9 @@ const Home = () => {
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{t('home.greeting') + ' '}</Text>
             <Text style={[styles.title]}>
-              {selectedLanguage != 'en' && userData?.name?.length > 6
+              {/* {selectedLanguage != 'en' && userData?.name?.length > 6
                 ? `${userData.name.substring(0, 6)}...`
-                : userData?.name}
+                : userData?.name} */}
             </Text>
           </View>
           <View style={styles.IconsContainer}>

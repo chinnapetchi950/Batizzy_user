@@ -7,72 +7,66 @@ import {
   Dimensions,
   Pressable,
 } from 'react-native';
-import {useTranslation} from 'react-i18next';
-import {hp, wp} from '../helper/constants';
+import {hp} from '../helper/constants';
 
-const icons = [
-  require('../../assets/icons/tab1.png'),
-  require('../../assets/icons/tab2.png'),
-  require('../../assets/icons/tab4.png'),
-  require('../../assets/icons/tab5.png'),
-  require('../../assets/icons/helpIcon.png'),
-  require('../../assets/icons/tab6.png'),
-];
+const {width} = Dimensions.get('window');
 
-const TabBar = ({state, descriptors, navigation, onPressPlus}) => {
-  const focusedRoute = state.routes[state.index];
-  const screenWidth = Dimensions.get('window').width;
+const TAB_ICONS = {
+  tab1: require('../../assets/icons/tab1.png'),
+  SocialTab: require('../../assets/icons/tab2.png'),
+  MarketPlace: require('../../assets/icons/tab4.png'),
+  BlogScreen: require('../../assets/icons/tab5.png'),
+  HelpScreen: require('../../assets/icons/helpIcon.png'),
+  Profile: require('../../assets/icons/tab6.png'),
+};
 
-  const leftTabs = state.routes.slice(0, 3);
-  const rightTabs = state.routes.slice(3, 6);
-
-  const renderTab = (route, index, isLeft) => {
-    const isFocused = route.key === focusedRoute.key;
-    return (
-      <TouchableOpacity
-        key={route.key}
-        onPress={() => {
-          const event = navigation.emit({
-            type: 'tabPress',
-            target: route.key,
-            canPreventDefault: true,
-          });
-
-          if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate(route.name);
-          }
-        }}
-        style={styles.tabItem}>
-        <Image
-          source={icons[isLeft ? index : index + 3]}
-          style={[styles.tabIcon, {tintColor: isFocused ? '#754595' : 'black'}]}
-          resizeMode={'contain'}
-        />
-        {isFocused && <View style={styles.activeIndicator} />}
-      </TouchableOpacity>
-    );
-  };
-
+const TabBar = ({state, navigation, onPressPlus}) => {
   return (
     <View style={styles.container}>
-      <View style={styles.customShadow} />
-      <View style={styles.tabBarContainer}>
-        <View style={styles.leftTabs}>
-          {leftTabs.map((route, index) => renderTab(route, index, true))}
-        </View>
-        <View style={styles.rightTabs}>
-          {rightTabs.map((route, index) => renderTab(route, index, false))}
-        </View>
+      {/* Tabs */}
+      <View style={styles.tabsRow}>
+        {state.routes.map((route, index) => {
+          const isFocused = state.index === index;
+          const icon = TAB_ICONS[route.name];
+
+          const onPress = () => {
+            const event = navigation.emit({
+              type: 'tabPress',
+              target: route.key,
+              canPreventDefault: true,
+            });
+
+            if (!isFocused && !event.defaultPrevented) {
+              navigation.navigate(route.name);
+            }
+          };
+
+          return (
+            <TouchableOpacity
+              key={route.key}
+              onPress={onPress}
+              style={styles.tabItem}
+              activeOpacity={0.8}>
+              <Image
+                source={icon}
+                style={[
+                  styles.icon,
+                  {tintColor: isFocused ? '#754595' : '#000'},
+                ]}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+          );
+        })}
       </View>
-      {/* Plus icon in the center */}
-      <View
-        style={[styles.centerTabContainer, {left: screenWidth / 2 - hp(5.5)}]}>
+
+      {/* Floating Plus Button */}
+      <View style={styles.plusContainer}>
         <Pressable onPress={onPressPlus}>
-          <View style={styles.plusIconContainer}>
+          <View style={styles.plusButton}>
             <Image
               source={require('../../assets/icons/plusIcon.png')}
               style={styles.plusIcon}
-              resizeMode="contain"
             />
           </View>
         </Pressable>
@@ -81,61 +75,59 @@ const TabBar = ({state, descriptors, navigation, onPressPlus}) => {
   );
 };
 
+export {TabBar};
+
+
+
 const styles = StyleSheet.create({
   container: {
-    position: 'relative',
-    height: hp(9),
-    paddingHorizontal: 20,
-    backgroundColor: 'white',
-  },
-  customShadow: {
-    position: 'absolute',
-    top: -hp(0.5),
-    left: 0,
-  },
-  tabBarContainer: {
-    flexDirection: 'row',
-    height: hp(9),
-    backgroundColor: 'white',
+    backgroundColor: '#fff',
     borderTopWidth: 1,
-    borderTopColor: '#E0E0E0',
+    borderTopColor: '#E5E7EB',
+    height: hp(10), // space for floating button
   },
-  leftTabs: {
+
+  tabsRow: {
     flexDirection: 'row',
-  },
-  rightTabs: {
-    flexDirection: 'row',
-    flex: 1,
-    paddingLeft: wp(10),
-  },
-  tabItem: {
-    justifyContent: 'center',
     alignItems: 'center',
-    flex: 1,
+    justifyContent: 'space-around', // 🔥 KEY FIX
+    height: hp(8),
   },
-  tabIcon: {
-    height: hp(3),
+
+  tabItem: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  icon: {
     width: hp(3),
+    height: hp(3),
   },
-  activeIndicator: {
+
+  plusContainer: {
     position: 'absolute',
+    top: -hp(4),
+    left: width / 2 - hp(3.5),
   },
-  centerTabContainer: {
-    position: 'absolute',
-    top: -hp(5),
-    zIndex: 10,
+
+  plusButton: {
+    width: hp(7),
+    height: hp(7),
+    borderRadius: hp(3.5),
+    backgroundColor: '#754595',
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 6, // Android shadow
   },
-  plusButtonShadow: {
-    position: 'absolute',
-    top: hp(0.5),
-  },
-  plusIconContainer: {
-    width: 80,
-  },
+
   plusIcon: {
-    width: 60,
-    height: 60,
+    width: hp(6),
+    height: hp(6),
+    //tintColor: '#fff',
   },
 });
 
-export {TabBar};
+
+
+
+// export {TabBar};

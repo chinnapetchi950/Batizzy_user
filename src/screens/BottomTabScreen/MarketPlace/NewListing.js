@@ -33,7 +33,7 @@ import Colors from '../../../helper/Colors';
 import FontFamily from '../../../helper/FontFamily';
 import Input from '../../../common/Input';
 import Loader from '../../../common/Loader';
-import {useLanguage} from '../../../context/LanguageContext';
+// import {useLanguage} from '../../../context/LanguageContext';
 import Icons from '../../../common/Icons';
 
 const NewListing = () => {
@@ -63,7 +63,7 @@ const NewListing = () => {
   const [isTitle, setTitle] = useState('');
   const [isPrice, setPrice] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const {selectedLanguage, changeLanguage} = useLanguage();
+  // const {selectedLanguage, changeLanguage} = useLanguage();
 
   const conditions = [
     {label: t('marketplace.new'), value: 'new'},
@@ -267,11 +267,11 @@ const NewListing = () => {
           />
         </ImageBackground>
         <Text style={styles.categoryText}>
-          {selectedLanguage == 'fr' || item?.name_fr?.length > 18
+          {/* {selectedLanguage == 'fr' || item?.name_fr?.length > 18
             ? `${item?.name_fr?.slice(0, 18)}...`
             : selectedLanguage == 'de' || item?.name_de?.length > 18
             ? `${item?.name_de?.slice(0, 18)}...`
-            : `${item?.name?.slice(0, 30)}...`}
+            : `${item?.name?.slice(0, 30)}...`} */}
         </Text>
       </Pressable>
     );
