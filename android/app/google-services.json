@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "557806282257",
+    "project_id": "batizzy-user",
+    "storage_bucket": "batizzy-user.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557806282257:android:a34a87284032775ea733b0",
+        "android_client_info": {
+          "package_name": "com.batizzy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBy9lf4xm1jPuQI_pACHEz_kVqxlBmVqlk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
