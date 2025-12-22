@@ -190,7 +190,7 @@ const NewRequestDetails = () => {
   const handleApiError = response => {
     const {message, error_details} = response;
     showMessage({
-      message: message || 'An error occurred',
+      message: message || t('common.errorOccurred'),
       type: 'warning',
     });
 

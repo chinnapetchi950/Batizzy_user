@@ -27,7 +27,7 @@ import moment from 'moment';
 import uploads_url from '../../helper/ImageUrl';
 import FontFamily from '../../helper/FontFamily';
 import Loader from '../../common/Loader';
-// import {useLanguage} from '../../context/LanguageContext';
+import {useLanguage} from '../../context/LanguageContext';
 import {showMessage} from 'react-native-flash-message';
 
 const BlogScreen = () => {
@@ -40,7 +40,7 @@ const BlogScreen = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [userData, setUserData] = useState('');
   const [categoryData, setCategoryData] = useState('');
-  // const {selectedLanguage, changeLanguage} = useLanguage();
+  const {selectedLanguage, changeLanguage} = useLanguage();
 
   useEffect(() => {
     getCategoryData();
@@ -181,11 +181,11 @@ const BlogScreen = () => {
           </ImageBackground>
         </View>
         <Text style={[styles.iconText]}>
-          {/* {selectedLanguage == 'fr' || item?.name_fr?.length > 18
+          {selectedLanguage == 'fr' || item?.name_fr?.length > 18
             ? `${item?.name_fr?.slice(0, 18)}...`
             : selectedLanguage == 'de' || item?.name_de?.length > 18
             ? `${item?.name_de?.slice(0, 18)}...`
-            : `${item?.name?.slice(0, 30)}...`} */}
+            : `${item?.name?.slice(0, 30)}...`}
         </Text>
       </View>
     );
@@ -228,11 +228,11 @@ const BlogScreen = () => {
                 fontWeight: 'bold', // Bold title text
                 textAlign: 'center',
               }}>
-              {/* {selectedLanguage == 'fr' && item?.title_fr?.length > 30
+              {selectedLanguage == 'fr' && item?.title_fr?.length > 30
                 ? `${item.title_fr.slice(0, 30)}...`
                 : selectedLanguage == 'de' && item?.title_de?.length > 30
                 ? `${item.title_de.slice(0, 30)}...`
-                : `${item.title.slice(0, 30)}...`} */}
+                : `${item.title.slice(0, 30)}...`}
             </Text>
           </View>
         </ImageBackground>
@@ -260,18 +260,18 @@ const BlogScreen = () => {
                   {moment(item?.created_at).format('ddd, DD MMM YYYY')}
                 </Text>
                 <Text style={[styles.titileText]}>
-                  {/* {selectedLanguage == 'fr' && item?.title_fr?.length > 30
+                  {selectedLanguage == 'fr' && item?.title_fr?.length > 30
                     ? `${item.title_fr.slice(0, 30)}...`
                     : selectedLanguage == 'de' && item?.title_de?.length > 30
                     ? `${item.title_de.slice(0, 30)}...`
-                    : `${item.title.slice(0, 30)}...`} */}
+                    : `${item.title.slice(0, 30)}...`}
                 </Text>
                 <Text style={[styles.descrText]}>
-                  {/* {selectedLanguage == 'fr' && item?.content_fr?.length > 90
+                  {selectedLanguage == 'fr' && item?.content_fr?.length > 90
                     ? `${item.content_fr.slice(0, 90)}...`
                     : selectedLanguage == 'de' && item?.content_de?.length > 90
                     ? `${item.content_de.slice(0, 90)}...`
-                    : `${item.content.slice(0, 90)}...`} */}
+                    : `${item.content.slice(0, 90)}...`}
                 </Text>
               </View>
             </View>
@@ -284,7 +284,7 @@ const BlogScreen = () => {
   const emptyMesRender = () => {
     return (
       <View style={{flex: 1}}>
-        <Text style={[styles.emptyMsg]}>{t('recordNotFound')}</Text>
+        <Text style={[styles.emptyMsg]}>{t('common.recordNotFound')}</Text>
       </View>
     );
   };
@@ -298,7 +298,7 @@ const BlogScreen = () => {
       <StatusBar animated={true} backgroundColor={Colors.white} />
       <View style={styles.wrapper}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>{'Blogs'}</Text>
+          <Text style={styles.title}>{t('blog.title')}</Text>
         </View>
         <View style={styles.IconsContainer}>
           <Pressable onPress={() => navigation.navigate(routes.ChatScreen)}>
@@ -340,7 +340,7 @@ const BlogScreen = () => {
             ListEmptyComponent={() => emptyMesRender()}
             showsVerticalScrollIndicator={false}
           />
-          <Text style={[styles.postTitle]}>{'Most Recent'}</Text>
+          <Text style={[styles.postTitle]}>{t('blog.mostRecent')}</Text>
           <FlatList
             // contentContainerStyle={{width: '100%', flex: 1}}
             data={blogRecentData}
@@ -352,7 +352,7 @@ const BlogScreen = () => {
             ListEmptyComponent={() => emptyMesRender()}
             showsVerticalScrollIndicator={false}
           />
-          <Text style={[styles.postTitle]}>{'Trending '}</Text>
+          <Text style={[styles.postTitle]}>{t('blog.trending')}</Text>
 
           <FlatList
             contentContainerStyle={{paddingBottom: '20%'}}

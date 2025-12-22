@@ -121,7 +121,7 @@ const FollowRequestList = ({searchTerm}) => {
     const {message, error_details} = response;
 
     showMessage({
-      message: message || 'An error occurred',
+      message: message || t('common.errorOccurred'),
       type: 'warning',
     });
 
@@ -181,7 +181,7 @@ const FollowRequestList = ({searchTerm}) => {
   const emptyMesRender = () => {
     return (
       <View style={{flex: 1}}>
-        <Text style={[styles.emptyMsg]}>{t('recordNotFound')}</Text>
+        <Text style={[styles.emptyMsg]}>{t('common.recordNotFound')}</Text>
       </View>
     );
   };

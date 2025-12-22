@@ -214,7 +214,7 @@ const List = ({isSearchVisible, setIsSearchVisible}) => {
   const emptyMesRender = () => {
     return (
       <View style={{flex: 1}}>
-        <Text style={[styles.emptyMsg]}>{t('recordNotFound')}</Text>
+        <Text style={[styles.emptyMsg]}>{t('common.recordNotFound')}</Text>
       </View>
     );
   };

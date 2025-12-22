@@ -39,7 +39,7 @@ import Colors from '../../helper/Colors';
 import Input from '../../common/Input';
 import FontFamily from '../../helper/FontFamily';
 import Loader from '../../common/Loader';
-// import {useLanguage} from '../../context/LanguageContext';
+import {useLanguage} from '../../context/LanguageContext';
 
 const PostRequest = () => {
   const {t} = useTranslation();
@@ -67,7 +67,7 @@ const PostRequest = () => {
   const [isSelectedCategoryID, setSelectedCategoryID] = useState(null);
   const [isDescription, setIsDescription] = useState('');
   const [isCurrentAddress, setCurrentAddress] = useState(
-    'Fetching location...',
+    t('common.fetchingLocation'),
   );
   const [isAllSkillsList, setIsAllSkillsList] = useState([]);
   const [isRenovationTypesList, setIsRenovationTypesList] = useState([]);
@@ -80,7 +80,7 @@ const PostRequest = () => {
   const [displaySkillName, setDisplaySkillName] = useState(
     t('postrequest.skillsRequiredpl'),
   );
-  // const {selectedLanguage, changeLanguage} = useLanguage();
+ const {selectedLanguage, changeLanguage} = useLanguage();
 
   const scopes = [
     {
@@ -260,7 +260,7 @@ const PostRequest = () => {
   const handleApiError = response => {
     const {message, error_details} = response;
     showMessage({
-      message: message || 'An error occurred',
+      message: message || t('common.errorOccurred'),
       type: 'warning',
     });
 
@@ -312,12 +312,12 @@ const PostRequest = () => {
             setCurrentAddress(address);
           } catch (error) {
             console.error(error);
-            setCurrentAddress(t('LocationNotfound'));
+            setCurrentAddress(t('common.locationNotFound'));
           }
         },
         error => {
           console.error(error);
-          setCurrentAddress(t('LocationNotfound'));
+          setCurrentAddress(t('common.locationNotFound'));
         },
         {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
       );
@@ -1001,11 +1001,11 @@ const PostRequest = () => {
                           <>
                             <View key={index} style={styles.selectedSkill}>
                               <Text style={styles.selectedSkillText}>
-                                {/* {selectedLanguage == 'fr'
+                                {selectedLanguage == 'fr'
                                   ? skill?.name_fr
                                   : selectedLanguage == 'de'
                                   ? skill?.name_de
-                                  : skill?.name} */}
+                                  : skill?.name}
                               </Text>
                             </View>
                             <Pressable onPress={() => removeSkill(skill)}>
@@ -1028,11 +1028,11 @@ const PostRequest = () => {
                           style={styles.popularSkill}
                           onPress={() => addSkill(skill)}>
                           <Text style={styles.popularSkillText}>
-                            {/* {selectedLanguage == 'fr'
+                            {selectedLanguage == 'fr'
                               ? skill?.name_fr
                               : selectedLanguage == 'de'
                               ? skill?.name_de
-                              : skill?.name} */}
+                              : skill?.name}
                           </Text>
                           <Image
                             source={icons.addIcon}

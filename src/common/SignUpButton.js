@@ -3,7 +3,7 @@ import React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {useTranslation} from 'react-i18next';
 import {responsiveScreenFontSize} from 'react-native-responsive-dimensions';
-
+import Colors from '../helper/Colors';
 const SignUpButton = ({title, onPress, mainContainerStyle, disabled}) => {
   return (
     <TouchableOpacity
@@ -18,15 +18,17 @@ const SignUpButton = ({title, onPress, mainContainerStyle, disabled}) => {
 export default SignUpButton;
 
 const styles = StyleSheet.create({
-  mainContainer: {
+   mainContainer: {
     width: '100%',
-    paddingVertical: 12,
-    borderRadius: 30,
+    paddingVertical: '4%',
+    backgroundColor: Colors.primary,
+    borderRadius: 12,
     alignItems: 'center',
   },
   textStyle: {
-    fontSize: responsiveScreenFontSize(2.4),
+  fontSize: responsiveScreenFontSize(2.4),
     color: '#FFFFFF',
     fontFamily: 'Inter-SemiBold',
+    textAlign: 'center',
   },
 });

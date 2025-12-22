@@ -19,7 +19,7 @@ import uploads_url from '../../../helper/ImageUrl';
 import {useNavigation} from '@react-navigation/native';
 import Colors from '../../../helper/Colors';
 import Loader from '../../../common/Loader';
-// import {useLanguage} from '../../../context/LanguageContext';
+import {useLanguage} from '../../../context/LanguageContext';
 
 const Category = () => {
   const {t} = useTranslation();
@@ -27,7 +27,7 @@ const Category = () => {
   const [isAllCategoryList, setIsAllCategoryList] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  // const {selectedLanguage, changeLanguage} = useLanguage();
+  const {selectedLanguage, changeLanguage} = useLanguage();
 
   useEffect(() => {
     getCategoryData();
@@ -64,11 +64,11 @@ const Category = () => {
           style={styles.categoryIcon}
         />
         <Text style={styles.categoryText}>
-          {/* {selectedLanguage == 'fr' || item?.name_fr?.length > 18
+          {selectedLanguage == 'fr' || item?.name_fr?.length > 18
             ? `${item?.name_fr?.slice(0, 18)}...`
             : selectedLanguage == 'de' || item?.name_de?.length > 18
             ? `${item?.name_de?.slice(0, 18)}...`
-            : `${item?.name?.slice(0, 30)}...`} */}
+            : `${item?.name?.slice(0, 30)}...`}
         </Text>
       </Pressable>
     );
@@ -77,7 +77,7 @@ const Category = () => {
   const emptyMesRender = () => {
     return (
       <View style={{flex: 1}}>
-        <Text style={[styles.emptyMsg]}>{t('recordNotFound')}</Text>
+        <Text style={[styles.emptyMsg]}>{t('common.recordNotFound')}</Text>
       </View>
     );
   };

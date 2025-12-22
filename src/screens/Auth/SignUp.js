@@ -125,7 +125,7 @@ const SignUp = () => {
     const {message, error_details} = response;
 
     showMessage({
-      message: message || t('error_generic'),
+      message: message || t('common.errorOccurred'),
       type: 'warning',
     });
 

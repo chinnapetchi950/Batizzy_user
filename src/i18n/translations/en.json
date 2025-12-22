@@ -52,7 +52,24 @@
     "default": "English"
   },
   "common": {
-    "errorOccurred": "An error occurred"
+    "errorOccurred": "An error occurred",
+    "error": "Error",
+    "cancel": "Cancel",
+    "ok": "OK",
+    "reply": "Reply",
+    "replies": "Replies",
+    "hideReplies": "Hide Replies",
+    "view": "View",
+    "locationNotFound": "Location not found",
+    "recordNotFound": "Record not found",
+    "imageNotSupported": "Image not supported",
+    "image": "Image",
+    "loading": "Loading...",
+    "received": "Received",
+    "servicesRequired": "Services Required:",
+    "words": "words",
+    "takePicture": "Take Picture",
+    "fetchingLocation": "Fetching location..."
   },
 "signup": {
   "signup_title": "Sign Up",
@@ -242,7 +259,39 @@
     "selectSkills": "Please select required skills",
     "describeWhatYouNeed": "Describe what you need",
     "description": "Description",
-    "selectLocation": "Select location"
+    "selectLocation": "Select location",
+    "skillsRequiredpl": "Skills Required",
+    "scopes": {
+      "small": "Small",
+      "smallSubTitle": "Minor repairs and updates",
+      "medium": "Medium",
+      "mediumSubTitle": "Moderate renovations",
+      "large": "Large",
+      "largeSubTitle": "Major renovations"
+    },
+    "experience": {
+      "entry": "Entry Level",
+      "entrySubTitle": "0-2 years experience",
+      "intermediate": "Intermediate",
+      "intermediateSubTitle": "3-5 years experience",
+      "expert": "Expert",
+      "expertSubTitle": "5+ years experience"
+    },
+    "timeLine": {
+      "moreThan6Months": "More than 6 months",
+      "threeToSixMonths": "3 to 6 months",
+      "oneToThreeMonths": "1 to 3 months"
+    },
+    "validation": {
+      "enterDescription": "Please enter description",
+      "uploadImages": "Please upload images"
+    },
+    "uploadLimitExceeded": "You can upload a maximum of 10 files",
+    "takePictures": "Take Pictures",
+    "whatHappensAfterPost": "What happens after you post?",
+    "receiveProposals": "You'll receive proposals from contractors",
+    "postRequest": "Post Request",
+    "editRequest": "Edit Request"
   },
   "myRequestDetails": {
     "details": "Details",
@@ -431,5 +480,170 @@
     "title": "Notification",
     "emptyMessage": "Record not found"
   },
-  "error_generic":"Internal server error"
+  "marketplace": {
+    "title": "Marketplace",
+    "todaysPicks": "Today's Picks",
+    "searchListings": "Search Listings",
+    "filters": "Filters",
+    "reset": "Reset",
+    "price": "Price",
+    "minimum": "Minimum",
+    "maximum": "Maximum",
+    "selectLocation": "Select Location",
+    "apply": "Apply",
+    "followers": "Followers",
+    "following": "Following",
+    "activeListings": "Active Listings",
+    "userListings": "User Listings",
+    "myMarketplace": "My Marketplace",
+    "sell": "Sell",
+    "category": "Category",
+    "new": "New",
+    "old_like_new": "Old Like New",
+    "used_good": "Used - Good",
+    "used_fair": "Used - Fair",
+    "viewAccountText": "View Account",
+    "pleaseUploadImages": "Please upload at least one image",
+    "pleaseEnterTitle": "Please enter product title",
+    "pleaseEnterPrice": "Please enter price",
+    "pleaseSelectCategory": "Please select category",
+    "pleaseSelectCondition": "Please select condition"
+  },
+  "blog": {
+    "title": "Blogs",
+    "mostRecent": "Most Recent",
+    "trending": "Trending"
+  },
+  "socialPostScreen": {
+    "greeting": "Hello",
+    "placeholder": "What's on your mind?",
+    "comments": "Comments",
+    "writeReply": "Write a reply...",
+    "addComment": "Add a comment...",
+    "imageLimitExceeded": "You can upload a maximum of 10 photos or videos.",
+    "image": "Image"
+  },
+  "universalSearch": {
+    "socialProfile": "Social Profile",
+    "marketplaceProfile": "Marketplace Profile",
+    "search": "Search",
+    "universalSearch": "Universal Search"
+  },
+  "home": {
+    "greeting": "Hello",
+    "search": "Search",
+    "requests": "Requests",
+    "suggestions": "Suggestions",
+    "help": "Help",
+    "subtitle": "Get professional help for your renovation needs",
+    "viewButton": "View All",
+    "governmentHelp": "Government Help",
+    "betterHome": "Better home renovation assistance",
+    "training": "Training",
+    "newRequests": "New Requests",
+    "viewAll": "View All",
+    "requestId": "Request ID",
+    "projectName": "Project Name",
+    "completionDate": "Completion Date",
+    "status": "Status",
+    "businessPartners": "Business Partners"
+  },
+  "request": {
+    "requests": "Requests",
+    "placeholder": "Search requests...",
+    "myRequests": "My Requests",
+    "newRequests": "New Requests",
+    "requestsStatus": "Request Status",
+    "deleteRequest": "Delete Request",
+    "deleteRequestConfirmation": "Are you sure you want to delete this request?"
+  },
+  "training": {
+    "contractorOfMonth": "Contractor of the Month",
+    "title": "Training"
+  },
+  "otheruserprofile": {
+    "followers": "Followers",
+    "following": "Following",
+    "follow": "Follow",
+    "message": "Message",
+    "noPostFound": "No Post Found",
+    "posts": "'s posts",
+    "comments": "Comments",
+    "writeAReply": "Write a reply...",
+    "addAComment": "Add a comment...",
+    "remove": "Remove",
+    "mySocial": "My Social",
+    "block": "Block",
+    "report": "Report"
+  },
+  "socialFollowersList": {
+    "noDataFound": "No Data Found",
+    "message": "Message",
+    "menu": "⋮",
+    "confirm": "Confirm",
+    "delete": "Delete"
+  },
+  "followingList": {
+    "title": "Following List",
+    "searchListings": "Search Listings",
+    "noDataFound": "No Data Found",
+    "listing": "Listing"
+  },
+  "productdetails": {
+    "title": "Marketplace",
+    "sendMessage": "Send seller a message",
+    "messagePlaceholder": "Hi, is this still available?",
+    "descriptionTitle": "Description",
+    "readMore": "Read More",
+    "readLess": "Read Less",
+    "sellerInformation": "Seller Information",
+    "sellerProfile": "Seller Profile",
+    "follow": "Follow",
+    "unfollow": "Unfollow",
+    "details": "Details",
+    "condition": "Condition",
+    "location": "Location",
+    "similarListings": "Similar listings from sellers",
+    "joinedIn": "Joined in"
+  },
+  "completedState": {
+    "details": "Details",
+    "viewProfile": "View profile",
+    "contractor": "Contractor",
+    "estimatedBudget": "Estimated Budget",
+    "timeline": "Timeline",
+    "servicesRequired": "Services Required:",
+    "detailsLabel": "Details :",
+    "status": "Request Status",
+    "addReview": "Add Review",
+    "typeHere": "Type here...",
+    "send": "Send",
+    "writeComment": "Write Comment",
+    "requestID": "Request ID"
+  },
+  "settings": {
+    "settings": "Settings",
+    "general": "General",
+    "change_language": "Change Language",
+    "change_password": "Change Password",
+    "delete_account": "Delete Account",
+    "terms_conditions": "Terms & Conditions",
+    "privacy_policy": "Privacy Policy",
+    "cancellation_policy": "Cancellation Policy",
+    "aboutUs": "About Us",
+    "helpCenter": "Help Center",
+    "notification": "Notification",
+    "logoutConfirmation": {
+      "logout": "Logout",
+      "message": "Are you sure you want to logout?",
+      "no": "No",
+      "yes": "Yes"
+    }
+  },
+  "blogDetail": {
+    "blogDetails": "Blog Details",
+    "no_chats_found": "No Chats found",
+    "hello_text": "Hello"
+  },
+  "error_generic": "Internal server error"
 }

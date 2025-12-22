@@ -23,13 +23,13 @@ import FontFamily from '../../helper/FontFamily';
 import uploads_url from '../../helper/ImageUrl';
 import Icons from '../../common/Icons';
 import moment from 'moment';
-// import {useLanguage} from '../../context/LanguageContext';
+import {useLanguage} from '../../context/LanguageContext';
 
 const BlogDetailScreen = props => {
   const {t} = useTranslation();
   const navigation = useNavigation();
   const blogData = props.route.params?.item;
-  // const {selectedLanguage, changeLanguage} = useLanguage();
+  const {selectedLanguage, changeLanguage} = useLanguage();
 
   const renderSkills = item => {
     return (
@@ -105,18 +105,18 @@ const BlogDetailScreen = props => {
           {'Published ' + moment(blogData?.created_at).format('DD MMMM YYYY')}
         </Text>
         <Text style={[styles.titileText]}>
-          {/* {selectedLanguage == 'fr'
+          {selectedLanguage == 'fr'
             ? blogData?.title_fr
             : selectedLanguage == 'de'
             ? blogData?.title_de
-            : blogData?.title} */}
+            : blogData?.title}
         </Text>
         <Text style={[styles.descrText]}>
-          {/* {selectedLanguage == 'fr'
+          {selectedLanguage == 'fr'
             ? blogData?.content_fr
             : selectedLanguage == 'de'
             ? blogData?.content_de
-            : blogData?.content} */}
+            : blogData?.content}
         </Text>
       </View>
     </SafeAreaView>

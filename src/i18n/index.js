@@ -12,12 +12,13 @@ const resources = {
   de: {translation: de},
 };
 
+// Initialize i18n
 i18n
   .use(initReactI18next) // Pass the instance to react-i18next
   .init({
     resources, // Attach the translations
     fallbackLng: 'en', // Default language if detection fails
-    lng: 'en', // Set default language explicitly to English (or any other default language)
+    lng: 'en', // Set default language (will be updated by LanguageContext)
     supportedLngs: ['en', 'fr', 'de'], // List of supported languages
     interpolation: {
       escapeValue: false, // React already escapes values

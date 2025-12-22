@@ -112,7 +112,7 @@ const MySelllerProfileScreen = props => {
   const emptyMesRender = () => {
     return (
       <View style={{flex: 1}}>
-        <Text style={[styles.emptyMsg]}>{t('recordNotFound')}</Text>
+        <Text style={[styles.emptyMsg]}>{t('common.recordNotFound')}</Text>
       </View>
     );
   };
@@ -285,7 +285,7 @@ const MySelllerProfileScreen = props => {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                   }}>
-                  <Text style={[styles.modalText]}>{'Image'}</Text>
+                  <Text style={[styles.modalText]}>{t('common.image')}</Text>
                   <Pressable onPress={() => setModalVisible(!modalVisible)}>
                     <Icons
                       iconSetName={'Ionicons'}
@@ -305,7 +305,7 @@ const MySelllerProfileScreen = props => {
                     resizeMode="contain"
                   />
                 ) : (
-                  <Text>{'Image not supported'}</Text>
+                  <Text>{t('common.imageNotSupported')}</Text>
                 )}
               </View>
             </View>

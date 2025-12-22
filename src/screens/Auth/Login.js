@@ -27,7 +27,7 @@ import Colors from '../../helper/Colors';
 import FontFamily from '../../helper/FontFamily';
 import Icons from '../../common/Icons';
 import LanguageData from '../../i18n/LanguageData';
-// import {useLanguage} from '../../context/LanguageContext';
+import {useLanguage} from '../../context/LanguageContext';
 import Loader from '../../common/Loader';
 import {CommonActions} from '@react-navigation/native';
 
@@ -41,48 +41,78 @@ const Login = () => {
   const [isPassword, setIsPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [storedLanguage, setStoredLanguage] = useState({});
-  // const {selectedLanguage, changeLanguage} = useLanguage();
+  const {selectedLanguage, changeLanguage} = useLanguage();
 
   const UserLogin = async () => {
+  try {
     const deviceToken = await AsyncStorage.getItem('deviceToken');
     setIsLoading(true);
-    var formData = new FormData();
+
+    const formData = new FormData();
     formData.append('email', isEmail);
     formData.append('password', isPassword);
     formData.append('fcm_token', deviceToken);
-    await fetch(baseURL + 'login', {
+
+    console.log('📤 Login Request Payload:', {
+      email: isEmail,
+      password: isPassword,
+      fcm_token: deviceToken,
+    });
+
+    const response = await fetch(baseURL + 'login', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'multipart/form-data',
       },
       body: formData,
-    })
-      .then(res => res.json())
-      .then(res => {
-        setIsLoading(false);
-        if (res.status === true) {
-          AsyncStorage.setItem('accessToken', res.token);
-          AsyncStorage.setItem('userId', String(res.user.id));
-          AsyncStorage.setItem('userData', JSON.stringify(res.user));
-          showMessage({
-            message: t('login.successMessage'),
-            floating: true,
-            position: 'top',
-            icon: 'success',
-            type: 'success',
-          });
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [{name: routes.TabNavigator}],
-            }),
-          );
-        } else {
-          handleApiError(res);
-        }
+    });
+
+    console.log('📡 HTTP Status:', response.status);
+
+    const res = await response.json();
+
+    console.log('✅ API Response:', res);
+
+    setIsLoading(false);
+
+    if (res.status === true) {
+      AsyncStorage.setItem('accessToken', res.token);
+      AsyncStorage.setItem('userId', String(res.user.id));
+      AsyncStorage.setItem('userData', JSON.stringify(res.user));
+
+      showMessage({
+        message: t('login.successMessage'),
+        floating: true,
+        position: 'top',
+        icon: 'success',
+        type: 'success',
       });
-  };
+
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 1,
+          routes: [{ name: routes.TabNavigator }],
+        })
+      );
+    } else {
+      console.log('❌ API Error Response:', res);
+      handleApiError(res);
+    }
+  } catch (error) {
+    setIsLoading(false);
+
+    console.log('🚨 Login API Crash:', error);
+    console.log('🚨 Error Message:', error?.message);
+    console.log('🚨 Error Stack:', error?.stack);
+
+    showMessage({
+      message: 'Network error. Please try again.',
+      type: 'danger',
+    });
+  }
+};
+
 
   const handleApiError = response => {
     const {message, error_details} = response;
@@ -125,7 +155,7 @@ const Login = () => {
 
   const onSelectLanguage = async (index, value, image, code) => {
     setStoredLanguage({image: image, text: value});
-    // changeLanguage(code);
+    changeLanguage(code);
     dropdownRef.current.hide();
   };
 
@@ -198,7 +228,8 @@ const Login = () => {
           </View>
         </ModalDropdown>
       </View>
-      <ScrollView>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}
+  keyboardShouldPersistTaps="handled">
         <View style={styles.logoContainer}>
           <Image source={icons.Intro1} style={styles.logo} />
         </View>
@@ -285,7 +316,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   formContainer: {
-    flex: 1,
+    //flex: 1,
     padding: 20,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,

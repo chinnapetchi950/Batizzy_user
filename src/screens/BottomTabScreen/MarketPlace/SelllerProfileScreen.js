@@ -113,7 +113,7 @@ const SelllerProfileScreen = props => {
   const emptyMesRender = () => {
     return (
       <View style={{flex: 1}}>
-        <Text style={[styles.emptyMsg]}>{t('recordNotFound')}</Text>
+        <Text style={[styles.emptyMsg]}>{t('common.recordNotFound')}</Text>
       </View>
     );
   };
@@ -226,7 +226,7 @@ const SelllerProfileScreen = props => {
   const handleApiError = response => {
     const {message, error_details} = response;
     showMessage({
-      message: message || 'An error occurred',
+      message: message || t('common.errorOccurred'),
       type: 'warning',
     });
 
@@ -453,7 +453,7 @@ const SelllerProfileScreen = props => {
                     resizeMode="contain"
                   />
                 ) : (
-                  <Text>{'Image not supported'}</Text>
+                  <Text>{t('common.imageNotSupported')}</Text>
                 )}
               </View>
             </View>

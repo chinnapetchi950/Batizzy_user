@@ -23,7 +23,10 @@ const OnBoarding = ({navigation}) => {
     setCurrentSlideIndex(currentIndex);
   };
 
-  const onboardData = t('onboarding', {returnObjects: true});
+  const onboardData = t('onboarding', {returnObjects: true}) || {
+    titles: [],
+    descriptions: [],
+  };
 
   return (
     <View style={styles.container}>
@@ -41,7 +44,7 @@ const OnBoarding = ({navigation}) => {
 
       <FlatList
         ref={ref}
-        data={onboardData.titles}
+        data={onboardData?.titles || []}
         horizontal
         pagingEnabled
         onMomentumScrollEnd={updateCurrentSlideIndex}
@@ -55,9 +58,9 @@ const OnBoarding = ({navigation}) => {
                 resizeMode="contain"
               />
             </View>
-            <Text style={styles.title}>{item}</Text>
+            <Text style={styles.title}>{item || ''}</Text>
             <Text style={styles.description}>
-              {onboardData.descriptions[index]}
+              {onboardData?.descriptions?.[index] || ''}
             </Text>
           </View>
         )}
@@ -65,7 +68,7 @@ const OnBoarding = ({navigation}) => {
 
       <View style={styles.dotBottomView}>
         <View style={styles.dotContainer}>
-          {onboardData?.titles?.map((_, index) => (
+          {(onboardData?.titles || []).map((_, index) => (
             <View
               key={index}
               style={[
@@ -80,7 +83,7 @@ const OnBoarding = ({navigation}) => {
             <TouchableOpacity
               onPress={() => {
                 const nextIndex = currentSlideIndex + 1;
-                if (nextIndex < onboardData.titles.length) {
+                if (nextIndex < (onboardData?.titles?.length || 0)) {
                   ref.current.scrollToIndex({animated: true, index: nextIndex});
                   setCurrentSlideIndex(nextIndex);
                 }

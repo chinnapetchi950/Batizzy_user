@@ -521,7 +521,7 @@ const OtherUserProfile = () => {
   const handleApiError = response => {
     const {message, error_details} = response;
     showMessage({
-      message: message || 'An error occurred',
+      message: message || t('common.errorOccurred'),
       type: 'warning',
     });
 
@@ -650,9 +650,9 @@ const OtherUserProfile = () => {
                 <TouchableOpacity onPress={() => toggleReplies(item.id)}>
                   <Text style={{marginLeft: 10}}>
                     {isExpanded
-                      ? 'Hide Replies'
-                      : `View ${repliesCount} ${
-                          repliesCount === 1 ? 'Reply' : 'Replies'
+                      ? t('common.hideReplies')
+                      : `${t('common.view')} ${repliesCount} ${
+                          repliesCount === 1 ? t('common.reply') : t('common.replies')
                         }`}
                   </Text>
                 </TouchableOpacity>
