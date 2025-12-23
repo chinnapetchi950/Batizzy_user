@@ -25,6 +25,7 @@ const CustomSearchBar = ({
   isProfileImage,
   profileImageSource,
   onPressProfile,
+  IssearchIcon,
 }) => {
   const navigation = useNavigation();
   return (
@@ -57,7 +58,9 @@ const CustomSearchBar = ({
         </Pressable>
       )}
       <View style={styles.searchContainer}>
+        {IssearchIcon&&
         <Image source={icons.searchIcon} style={styles.searchIcon} />
+}
         <TextInput
           style={styles.input}
           placeholder={placeholder}
@@ -90,15 +93,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   searchContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderRadius: 30,
-  },
+  flex: 1,
+  flexDirection: 'row',
+  alignItems: 'center',
+  borderWidth: 1,
+  borderColor: '#9D9D9D',
+  borderRadius: 35,
+  marginLeft: 10,
+  backgroundColor: '#fff',  // make corners visible
+  overflow: 'hidden',        // clip children inside rounded corners
+  paddingHorizontal: 10,     // optional: adds spacing inside
+},
   searchIcon: {
     marginRight: 5,
     height: hp(2),
     width: hp(2),
+    marginLeft:2
+    
   },
   input: {
     flex: 1,
@@ -125,10 +136,13 @@ const styles = StyleSheet.create({
     width: wp(4),
     marginBottom: hp(0.5),
   },
-  profileImage: {
-    height: hp(5.3),
-    width: hp(5.3),
-  },
+profileImage: {
+  height: hp(5.3),
+  width: hp(5.3),
+  borderRadius: hp(5.3) / 2, // perfectly circular
+  resizeMode: 'cover',       // ensures image fills the circle
+  overflow: 'hidden',        // clips any extra parts
+}
 });
 
 export default CustomSearchBar;

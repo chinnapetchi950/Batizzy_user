@@ -318,9 +318,10 @@ const styles = StyleSheet.create({
   formContainer: {
     //flex: 1,
     padding: 20,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    elevation: 3,
+    // borderTopLeftRadius: 30,
+    // borderTopRightRadius: 30,
+    //elevation: 3,
+    marginBottom: 30,
   },
   title: {
     color: Colors.black,
@@ -328,7 +329,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 20,
     fontFamily: FontFamily.InterBold,
-    marginTop: 30,
+    //marginTop: 10,
   },
   label: {
     fontSize: responsiveScreenFontSize(2),

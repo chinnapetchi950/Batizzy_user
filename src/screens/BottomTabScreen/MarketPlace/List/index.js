@@ -9,6 +9,7 @@ import {
   Text,
   TextInput,
   View,
+  ScrollView
 } from 'react-native';
 import {useTranslation} from 'react-i18next';
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
@@ -309,119 +310,113 @@ const List = ({isSearchVisible, setIsSearchVisible}) => {
         />
       </View>
       {isCommentSheetOpen && (
-        <BottomSheetCondition
-          maxHeight={hp(65)}
-          isOpen={isCommentSheetOpen}
-          onClose={toggleCommentSheet}
-          renderContent={() => {
-            return (
-              <>
-                <View style={styles.conditionHeader}>
-                  <Text style={styles.conditionHeaderText}>
-                    {t('marketplace.filters')}
-                  </Text>
-                  <Pressable onPress={resetFilters}>
-                    <Text style={styles.resetText}>
-                      {t('marketplace.reset')}
-                    </Text>
-                  </Pressable>
-                </View>
-                <View style={styles.separator} />
-                <Text style={styles.priceText}>{t('marketplace.price')}</Text>
-                <View style={styles.priceMainContainer}>
-                  <TextInput
-                    placeholder={t('marketplace.minimum')}
-                    placeholderTextColor={'#000000'}
-                    style={styles.priceInputField}
-                    value={minPrice}
-                    onChangeText={text => setMinPrice(text)}
-                  />
-                  <View style={{width: 20}} />
-                  <TextInput
-                    placeholder={t('marketplace.maximum')}
-                    placeholderTextColor={'#000000'}
-                    style={styles.priceInputField}
-                    value={maxPrice}
-                    onChangeText={text => setMaxPrice(text)}
-                  />
-                </View>
-                <View style={styles.locationInputContainer}>
-                  <View style={styles.locationTextcontainer}>
-                    <Image
-                      source={icons.markerIcon}
-                      style={styles.filterMarkerIcon}
-                    />
+  <BottomSheetCondition
+    maxHeight={hp(55)}
+    isOpen={isCommentSheetOpen}
+    onClose={toggleCommentSheet}
+    renderContent={() => {
+      return (
+        <View style={{ flex: 1 }}>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{
+              paddingBottom: hp(4),
+            }}
+          >
+            {/* HEADER */}
+            <View style={styles.conditionHeader}>
+              <Text style={styles.conditionHeaderText}>
+                {t('marketplace.filters')}
+              </Text>
+              <Pressable onPress={resetFilters}>
+                <Text style={styles.resetText}>
+                  {t('marketplace.reset')}
+                </Text>
+              </Pressable>
+            </View>
 
-                    <GooglePlacesAutocomplete
-                      placeholder={
-                        isFilterAddress
-                          ? isFilterAddress
-                          : t('marketplace.selectLocation')
-                      }
-                      onPress={(data, details) => {
-                        setFilterAddress(data.description);
-                        setFilterLatitude(details.geometry.location.lat);
-                        setFilterLongitude(details.geometry.location.lng);
-                      }}
-                      query={{
-                        key: 'AIzaSyCceRTsiY-2UPVwytF6wytwaGmonWjvTHo',
-                        language: 'en',
-                      }}
-                      numberOfLines={1}
-                      fetchDetails
-                      textInputProps={{
-                        placeholderTextColor: Colors.lightPlaceholder,
-                      }}
-                      styles={{
-                        textInput: {
-                          color: Colors.fontDarkGray,
-                          fontFamily: FontFamily.InterMedium,
-                          borderWidth: 0.5,
-                        },
-                        poweredContainer: {
-                          justifyContent: 'flex-end',
-                          alignItems: 'center',
-                          borderBottomRightRadius: 5,
-                          borderBottomLeftRadius: 5,
-                          borderColor: '#c8c7cc',
-                          borderTopWidth: 0.5,
-                        },
-                        powered: {},
-                        listView: {},
-                        row: {
-                          backgroundColor: '#FFFFFF',
-                          padding: 13,
-                          height: 44,
-                          flexDirection: 'row',
-                        },
-                        separator: {
-                          height: 0.5,
-                          backgroundColor: '#c8c7cc',
-                        },
-                        description: {
-                          color: Colors.fontDarkGray,
-                        },
-                        loader: {
-                          flexDirection: 'row',
-                          justifyContent: 'flex-end',
-                          height: 20,
-                        },
-                      }}
-                    />
-                  </View>
-                </View>
+            <View style={styles.separator} />
 
-                <View style={{marginBottom: 25}}>
-                  <SignUpButton
-                    title={t('marketplace.apply')}
-                    onPress={applyFilters}
-                  />
-                </View>
-              </>
-            );
-          }}
-        />
-      )}
+            {/* PRICE */}
+            <Text style={styles.priceText}>
+              {t('marketplace.price')}
+            </Text>
+
+            <View style={styles.priceMainContainer}>
+              <TextInput
+                placeholder={t('marketplace.minimum')}
+                placeholderTextColor="#000000"
+                style={styles.priceInputField}
+                value={minPrice}
+                onChangeText={setMinPrice}
+              />
+
+              <View style={{ width: 20 }} />
+
+              <TextInput
+                placeholder={t('marketplace.maximum')}
+                placeholderTextColor="#000000"
+                style={styles.priceInputField}
+                value={maxPrice}
+                onChangeText={setMaxPrice}
+              />
+            </View>
+
+            {/* LOCATION */}
+            <View style={styles.locationInputContainer}>
+              <View style={styles.locationTextcontainer}>
+                <Image
+                  source={icons.markerIcon}
+                  style={styles.filterMarkerIcon}
+                />
+
+                <GooglePlacesAutocomplete
+                  placeholder={
+                    isFilterAddress
+                      ? isFilterAddress
+                      : t('marketplace.selectLocation')
+                  }
+                  fetchDetails
+                  onPress={(data, details) => {
+                    setFilterAddress(data.description);
+                    setFilterLatitude(details.geometry.location.lat);
+                    setFilterLongitude(details.geometry.location.lng);
+                  }}
+                  query={{
+                    key: 'AIzaSyCceRTsiY-2UPVwytF6wytwaGmonWjvTHo',
+                    language: 'en',
+                  }}
+                  textInputProps={{
+                    placeholderTextColor: Colors.lightPlaceholder,
+                  }}
+                  styles={{
+                    textInput: {
+                      color: Colors.fontDarkGray,
+                      fontFamily: FontFamily.InterMedium,
+                      borderWidth: 0.5,
+                    },
+                    listView: {
+                      zIndex: 999,
+                    },
+                  }}
+                />
+              </View>
+            </View>
+
+            {/* APPLY BUTTON */}
+            <View style={{ marginTop: hp(3) }}>
+              <SignUpButton
+                title={t('marketplace.apply')}
+                onPress={applyFilters}
+              />
+            </View>
+          </ScrollView>
+        </View>
+      );
+    }}
+  />
+)}
+
       {isLoading && (
         <Modal isVisible={isLoading} style={styles.modalContainer}>
           <View style={styles.loaderContainer}>
@@ -476,7 +471,7 @@ const styles = StyleSheet.create({
   image: {
     width: wp(45),
     height: hp(24),
-    borderRadius: 10,
+    borderRadius: 22,
     resizeMode: 'cover',
   },
   price: {

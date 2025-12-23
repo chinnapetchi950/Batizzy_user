@@ -218,19 +218,31 @@ const SignUp = () => {
       <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
         <Text style={styles.title}>{t('signup.signup_title')}</Text>
         <Text style={styles.subTitle}>{t('signup.signup_subtitle')}</Text>
-        <Text style={[styles.inputLabel]}>{t('signup.label_full_name')}</Text>
-        <Input
+        <Text style={[styles.inputLabel]}>{t('signup.label_full_name')}
+           <Text>*</Text>
+        </Text>
+         <TextInput
+              value={isFullName}
+              style={styles.input}
+              placeholder={t('signup.placeholder_full_name')}
+              onChangeText={text => {
+            setIsFullName(text);
+          }}
+              placeholderTextColor={Colors.lightPlaceholder}
+            />
+        {/* <Input
           value={isFullName}
           title={t('signup.label_full_name')}
           placeholder={t('signup.placeholder_full_name')}
           onChangeText={text => {
             setIsFullName(text);
           }}
-        />
+        /> */}
 
         <View style={{marginTop: 10}}>
           <Text style={styles.inputLabel}>
             {t('signup.label_phone_number')}
+            <Text>*</Text>
           </Text>
           <View style={styles.phoneInputContainer}>
             <TouchableOpacity
@@ -299,15 +311,26 @@ const SignUp = () => {
           )}
         </View>
         <View style={{marginTop: 10}}>
-          <Text style={[styles.inputLabel]}>{t('signup.label_email')}</Text>
-          <Input
+          <Text style={[styles.inputLabel]}>{t('signup.label_email')}
+            <Text>*</Text>
+          </Text>
+          <TextInput
+              value={isEmail}
+              style={styles.input}
+              placeholder={t('signup.placeholder_email')}
+               onChangeText={text => {
+              setIsEmail(text);
+            }}
+              placeholderTextColor={Colors.lightPlaceholder}
+            />
+          {/* <Input
             value={isEmail}
             title={t('signup.label_email')}
             placeholder={t('signup.placeholder_email')}
             onChangeText={text => {
               setIsEmail(text);
             }}
-          />
+          /> */}
         </View>
 
         <PasswordInput
@@ -329,7 +352,7 @@ const SignUp = () => {
             setIsConfirmPassword(text);
           }}
           secureTextEntry={!isConfirmPasswordVisible}
-          onPressViewPassword={toggleConfirmPasswordVisibility}
+          // onPressViewPassword={toggleConfirmPasswordVisibility}
           source={isConfirmPasswordVisible ? icons.view : icons.hide}
         />
         <Text style={styles.gengerText}>{t('signup.label_gender')}</Text>
@@ -391,11 +414,11 @@ const styles = StyleSheet.create({
   title: {
     color: 'black',
     fontSize: responsiveScreenFontSize(3),
-    marginBottom: 12,
+    marginBottom: 6,
     fontFamily: 'Inter-Bold',
   },
   subTitle: {
-    color: 'black',
+    color: '#1D1D1D',
     fontSize: responsiveScreenFontSize(1.7),
     marginBottom: 20,
     fontFamily: 'Inter-Regular',
@@ -426,7 +449,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   btnContainer: {
-    marginTop: 30,
+    marginTop: 40,
   },
   phoneInputContainer: {
     flexDirection: 'row',
@@ -542,5 +565,18 @@ const styles = StyleSheet.create({
     color: Colors.inputLabel,
     fontSize: responsiveScreenFontSize(1.6),
     fontFamily: FontFamily.InterBold,
+  },
+  input: {
+    width: '100%',
+    height: 48,
+    borderColor: '#00000036',
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    marginBottom: 10,
+    marginTop:6,
+    color: Colors.fontDarkGray,
+    fontFamily: FontFamily.InterMedium,
+    fontSize: responsiveScreenFontSize(1.8),
   },
 });

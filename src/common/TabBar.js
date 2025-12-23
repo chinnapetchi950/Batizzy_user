@@ -1,75 +1,96 @@
-import React from 'react';
+import React, {useCallback, useState} from 'react';
 import {
   View,
   TouchableOpacity,
   Image,
   StyleSheet,
   Dimensions,
-  Pressable,
 } from 'react-native';
-import {hp} from '../helper/constants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useFocusEffect} from '@react-navigation/native';
+import {routes} from '../navigation/Routes';
+import uploads_url from '../helper/ImageUrl';
 
 const {width} = Dimensions.get('window');
 
 const TAB_ICONS = {
-  tab1: require('../../assets/icons/tab1.png'),
-  SocialTab: require('../../assets/icons/tab2.png'),
-  MarketPlace: require('../../assets/icons/tab4.png'),
-  BlogScreen: require('../../assets/icons/tab5.png'),
-  HelpScreen: require('../../assets/icons/helpIcon.png'),
-  Profile: require('../../assets/icons/tab6.png'),
+  [routes.tab1]: require('../../assets/icons/tab1.png'),
+  [routes.SocialTab]: require('../../assets/icons/tab2.png'),
+  [routes.MarketPlace]: require('../../assets/icons/tab4.png'),
+  [routes.BlogScreen]: require('../../assets/icons/tab5.png'),
+  [routes.Profile]: require('../../assets/icons/tab6.png'), // fallback
 };
 
 const TabBar = ({state, navigation, onPressPlus}) => {
+  const currentRoute = state.routes[state.index].name;
+  const [userData, setUserData] = useState(null);
+
+  /** 🔹 Get user data on focus */
+  useFocusEffect(
+    useCallback(() => {
+      const getUserData = async () => {
+        const data = await AsyncStorage.getItem('userData');
+        if (data) {
+          setUserData(JSON.parse(data));
+        }
+      };
+      getUserData();
+    }, []),
+  );
+
+  const renderTab = (routeName) => {
+    const isFocused = currentRoute === routeName;
+
+    /** 🔹 Profile image logic */
+    const isProfileTab = routeName === routes.Profile;
+    const profileImage = userData?.profile_image;
+console.log('Profile image:', userData?.profile_image);
+
+    return (
+      <TouchableOpacity
+        key={routeName}
+        onPress={() => navigation.navigate(routeName)}
+        activeOpacity={0.85}
+        style={[styles.tabItem, isFocused && styles.activeTab]}>
+        <Image
+          source={
+            isProfileTab && profileImage
+              ? {uri: uploads_url + profileImage}
+              : TAB_ICONS[routeName]
+          }
+          style={[
+            styles.icon,
+            isProfileTab && profileImage && styles.profileIcon,
+            !isProfileTab && {
+              tintColor: isFocused ? '#754595' : '#fff',
+            },
+          ]}
+          resizeMode="cover"
+        />
+      </TouchableOpacity>
+    );
+  };
+
   return (
-    <View style={styles.container}>
-      {/* Tabs */}
-      <View style={styles.tabsRow}>
-        {state.routes.map((route, index) => {
-          const isFocused = state.index === index;
-          const icon = TAB_ICONS[route.name];
+    <View style={styles.wrapper}>
+      <View style={styles.tabBar}>
+        {renderTab(routes.tab1)}
+        {renderTab(routes.SocialTab)}
 
-          const onPress = () => {
-            const event = navigation.emit({
-              type: 'tabPress',
-              target: route.key,
-              canPreventDefault: true,
-            });
+        {/* PLUS BUTTON */}
+        <TouchableOpacity
+          onPress={onPressPlus}
+          activeOpacity={0.9}
+          style={styles.tabItem}>
+          <Image
+            source={require('../../assets/icons/plusIcon.png')}
+            style={[styles.icon, {tintColor: '#fff'}]}
+          />
+        </TouchableOpacity>
 
-            if (!isFocused && !event.defaultPrevented) {
-              navigation.navigate(route.name);
-            }
-          };
-
-          return (
-            <TouchableOpacity
-              key={route.key}
-              onPress={onPress}
-              style={styles.tabItem}
-              activeOpacity={0.8}>
-              <Image
-                source={icon}
-                style={[
-                  styles.icon,
-                  {tintColor: isFocused ? '#754595' : '#000'},
-                ]}
-                resizeMode="contain"
-              />
-            </TouchableOpacity>
-          );
-        })}
-      </View>
-
-      {/* Floating Plus Button */}
-      <View style={styles.plusContainer}>
-        <Pressable onPress={onPressPlus}>
-          <View style={styles.plusButton}>
-            <Image
-              source={require('../../assets/icons/plusIcon.png')}
-              style={styles.plusIcon}
-            />
-          </View>
-        </Pressable>
+        {renderTab(routes.MarketPlace)}
+        {renderTab(routes.BlogScreen)}
+        {renderTab(routes.Profile)}
       </View>
     </View>
   );
@@ -79,53 +100,52 @@ export {TabBar};
 
 
 
+
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    borderTopWidth: 1,
-    borderTopColor: '#E5E7EB',
-    height: hp(10), // space for floating button
+  wrapper: {
+    position: 'absolute',
+    bottom: 12,
+    width: '100%',
+    alignItems: 'center',
   },
 
-  tabsRow: {
+  tabBar: {
     flexDirection: 'row',
+    backgroundColor: '#754595',
+    width: '94%',
+    height: 60,
+    borderRadius: 30,
     alignItems: 'center',
-    justifyContent: 'space-around', // 🔥 KEY FIX
-    height: hp(8),
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
+    elevation: 10,
   },
 
   tabItem: {
+    width: 52,
+    height: 52,
+    borderRadius: 52/2,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+
+  activeTab: {
+    backgroundColor: '#fff',
   },
 
   icon: {
-    width: hp(3),
-    height: hp(3),
+    width: 22,
+    height: 22,
   },
 
-  plusContainer: {
-    position: 'absolute',
-    top: -hp(4),
-    left: width / 2 - hp(3.5),
-  },
-
-  plusButton: {
-    width: hp(7),
-    height: hp(7),
-    borderRadius: hp(3.5),
-    backgroundColor: '#754595',
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 6, // Android shadow
-  },
-
-  plusIcon: {
-    width: hp(6),
-    height: hp(6),
-    //tintColor: '#fff',
+  /** 🔹 Profile image style */
+  profileIcon: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
   },
 });
+
 
 
 

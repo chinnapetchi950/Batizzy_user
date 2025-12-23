@@ -12,6 +12,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ImageBackground
 } from 'react-native';
 import {useTranslation} from 'react-i18next';
 import ModalDropdown from 'react-native-modal-dropdown';
@@ -252,33 +253,35 @@ const Home = () => {
     );
   };
 
-  const renderCarouselItem = (item, index) => {
-    return (
-      <View
-        style={{
-          overflow: 'hidden',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: Colors.primary,
-          width: deviceWidth,
-          height: 180,
-          marginBottom: 10,
+  const CARD_HORIZONTAL_SPACE = 12; // adjust this value
+
+const renderCarouselItem = (item, index) => {
+  return (
+    <View
+      key={index}
+      style={{
+        width: deviceWidth - CARD_HORIZONTAL_SPACE * 2, // 🔥 reduce side space
+        height: 180,
+        marginHorizontal: CARD_HORIZONTAL_SPACE,         // small left & right
+        borderRadius: 16,
+        overflow: 'hidden',
+        justifyContent: 'center',
+      }}
+    >
+      <Image
+        source={{
+          uri: item.image ? uploads_url + item.image : images.coverDummy,
         }}
-        key={index}>
-        <Image
-          source={{
-            uri: item.image ? uploads_url + item.image : images.coverDummy,
-          }}
-          style={{
-            width: deviceWidth,
-            height: 180,
-            resizeMode: 'contain',
-            paddingBottom: 10,
-          }}
-        />
-      </View>
-    );
-  };
+        style={{
+          width: '100%',
+          height: '100%',
+          resizeMode: 'cover', // better for banners
+        }}
+      />
+    </View>
+  );
+};
+
 
   const onSelectLanguage = async (index, value, image, code) => {
     setStoredLanguage({image: image, text: value});
@@ -451,62 +454,133 @@ const Home = () => {
         </View>
 
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.requestMainContainer}>
-            <Pressable
-              style={styles.requestContainer}
-              onPress={() => {
-                navigate(routes.RequestsScreen);
-              }}>
-              <Image source={icons.requestIcon} style={styles.requestIcon} />
-              <Text style={styles.requestText}>{t('home.requests')}</Text>
-            </Pressable>
-            <Pressable
-              style={styles.suggestionContainer}
-              onPress={() => {
-                navigate(routes.SuggestionScreen);
-              }}>
-              <Image source={icons.suggestionIcon} style={styles.requestIcon} />
-              <Text style={styles.requestText}>{t('home.suggestions')}</Text>
-            </Pressable>
-            <Pressable
-              style={styles.helpContainer}
-              onPress={() => {
-                navigate(routes.HelpScreen);
-              }}>
-              <Image source={icons.helpIcon} style={styles.requestIcon} />
-              <Text style={styles.requestText}>{t('home.help')}</Text>
-            </Pressable>
-          </View>
-          <View style={styles.cardContainer}>
-            <View style={styles.textContainer}>
-              <Text style={styles.titlecard}>
-                {t('home.contractorOfTheMonth')}
-              </Text>
-              <Text style={styles.subtitle}>{t('home.subtitle')}</Text>
-            </View>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => gotoContractorMonth()}>
-              <Text style={styles.buttonText}>{t('home.viewButton')}</Text>
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity
-            onPress={() => {
-              navigate(routes.GovHelp);
-            }}>
-            <View style={styles.cardContainer}>
-              <View style={styles.textContainer}>
-                <Text style={styles.titlecard}>{t('home.governmentHelp')}</Text>
-                <Text style={styles.subtitle}>{t('home.betterHome')}</Text>
-              </View>
-              <View>
-                <Image
-                  source={icons.RightSideMoveBlueIcon}
-                  style={styles.RightSideMoveBlueIcon}
-                />
-              </View>
-            </View>
-          </TouchableOpacity>
+          <View style={styles.quickActionContainer}>
+  {/* Requests */}
+  <Pressable onPress={() => navigate(routes.RequestsScreen)}>
+  <ImageBackground
+    source={images.requestBg}   // 👈 your uploaded image
+    style={styles.quickCard}
+    resizeMode="stretch"           // VERY IMPORTANT for shape fit
+  >
+    <Image source={icons.requestIcon} style={styles.quickIcon} />
+
+    <View style={styles.arrowCircle}>
+      <Image source={icons.arrowRight} style={styles.arrowIcon} />
+    </View>
+
+    <Text style={styles.quickText}>{t('home.requests')}</Text>
+  </ImageBackground>
+</Pressable>
+<Pressable onPress={() => navigate(routes.SuggestionScreen)}>
+  <ImageBackground
+    source={images.suggestionBg}   // 👈 your uploaded image
+    style={styles.quickCard}
+    resizeMode="stretch"           // VERY IMPORTANT for shape fit
+  >
+    <Image source={icons.suggestionIcon} style={styles.quickIcon} />
+
+    <View style={[styles.arrowCircle,{backgroundColor: '#AE66DE',}]}>
+      <Image source={icons.arrowRight} style={styles.arrowIcon} />
+    </View>
+
+    <Text style={styles.quickText}>{t('home.suggestions')}</Text>
+  </ImageBackground>
+</Pressable>
+<Pressable onPress={() => navigate(routes.HelpScreen)}>
+  <ImageBackground
+    source={images.helpbg}   // 👈 your uploaded image
+    style={styles.quickCard}
+    resizeMode="stretch"           // VERY IMPORTANT for shape fit
+  >
+    <Image source={icons.helpIcon} style={styles.quickIcon} />
+
+    <View style={[styles.arrowCircle,{backgroundColor: '#FF795B',}]}>
+      <Image source={icons.arrowRight} style={styles.arrowIcon} />
+    </View>
+
+    <Text style={styles.quickText}>{t('home.help')}</Text>
+  </ImageBackground>
+</Pressable>
+
+  {/* <Pressable
+    style={[styles.quickCard, styles.requestBg]}
+    onPress={() => navigate(routes.RequestsScreen)}>
+    <Image source={icons.requestIcon} style={styles.quickIcon} />
+    <View style={styles.arrowCircle}>
+      <Image source={icons.arrowRight} style={styles.arrowIcon} />
+    </View>
+    <Text style={styles.quickText}>{t('home.help')}</Text>
+  </Pressable> */}
+
+  {/* Suggestions */}
+  {/* <Pressable
+    style={[styles.quickCard, styles.suggestionBg]}
+    onPress={() => navigate(routes.SuggestionScreen)}>
+    <Image source={icons.suggestionIcon} style={styles.quickIcon} />
+    <View style={styles.arrowCircle}>
+      <Image source={icons.arrowRight} style={styles.arrowIcon} />
+    </View>
+    <Text style={styles.quickText}>{t('home.suggestions')}</Text>
+  </Pressable>
+
+  {/* Help */}
+  {/* <Pressable
+    style={[styles.quickCard, styles.helpBg]}
+    onPress={() => navigate(routes.HelpScreen)}>
+    <Image source={icons.helpIcon} style={styles.quickIcon} />
+    <View style={styles.arrowCircle}>
+      <Image source={icons.arrowRight} style={styles.arrowIcon} />
+    </View>
+    <Text style={styles.quickText}>{t('home.help')}</Text>
+  </Pressable>  */}
+
+ 
+</View>
+
+          <View style={styles.featureContainer}>
+  <Text style={styles.featureTitle}>Feature Highlights</Text>
+
+  <View style={styles.featureRow}>
+    {/* Contractor of the Month */}
+    <TouchableOpacity
+      style={styles.featureCard}
+      onPress={() => gotoContractorMonth()}>
+      <Text style={styles.featureCardTitle}>
+        {t('home.contractorOfTheMonth')}
+      </Text>
+      <Text style={styles.featureCardSubtitle}>
+        {t('home.subtitle')}
+      </Text>
+
+      <View style={styles.arrowButtonf}>
+        <Image
+          source={icons.arrowRight}
+          style={styles.arrowIconf}
+        />
+      </View>
+    </TouchableOpacity>
+
+    {/* Government Renovation Help */}
+    <TouchableOpacity
+      style={styles.featureCard}
+      onPress={() => navigate(routes.GovHelp)}>
+      <Text style={styles.featureCardTitle}>
+        {t('home.governmentHelp')}
+      </Text>
+      <Text style={styles.featureCardSubtitle}>
+        {t('home.betterHome')}
+      </Text>
+<View style={{marginTop:30}}></View>
+      <View style={styles.arrowButtonf}>
+        <Image
+          source={icons.arrowRight}
+          style={styles.arrowIconf}
+        />
+      </View>
+    </TouchableOpacity>
+  </View>
+</View>
+
 
           <View style={styles.trainingMainContainer}>
             <TouchableOpacity
@@ -647,15 +721,17 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
   },
   notificationCount: {
-    backgroundColor: 'red',
+    backgroundColor: '#FF7F36',
     paddingVertical: 0.5,
     paddingHorizontal: 2,
-    borderRadius: 10,
+    borderRadius: 9,
     color: 'white',
     fontSize: responsiveFontSize(1.2),
     textAlignVertical: 'center',
     fontFamily: FontFamily.InterBlack,
-    height: 20,
+    height: 18,
+    width:18,
+    textAlign:'center',
     position: 'absolute',
     top: -7,
     left: 18,
@@ -862,4 +938,144 @@ const styles = StyleSheet.create({
     color: Colors.black,
     marginRight: 3,
   },
+  quickActionContainer: {
+  flexDirection: 'row',
+//  justifyContent: 'space-between',
+gap:20,
+  marginVertical: 16,marginHorizontal:20
+},
+
+quickCard: {
+  width: 105,
+  height: 120,
+  padding: 12,
+  justifyContent: 'space-between',
+},
+
+quickIcon: {
+  width: 60,
+  height: 76,
+  bottom: 8,
+  right:8,
+  resizeMode: 'contain',
+},
+
+arrowCircle: {
+  position: 'absolute',
+  top: 4,
+  right:0.2,
+  left:76,
+  width: 28,
+  height: 28,
+  borderRadius: 14,
+  backgroundColor: '#FECC16',
+  justifyContent: 'center',
+  alignItems: 'center',
+},
+
+arrowIcon: {
+  width: 18,
+  height: 18,
+  tintColor: '#000',
+},
+
+quickText: {
+  fontSize: 14,
+  fontWeight: '600',
+  color: '#000',
+},
+
+
+arrowIcon: {
+  width: 18,
+  height: 18,
+  tintColor: '#000',
+},
+
+// quickText: {
+//   fontSize: 14,
+//   fontWeight: '600',
+//   color: '#000',
+// },
+
+/* Background colors */
+requestBg: {
+  backgroundColor: '#FFD84D',
+},
+suggestionBg: {
+  backgroundColor: '#C084FC',
+},
+helpBg: {
+  backgroundColor: '#FFB4A2',
+},
+trainingBg: {
+  backgroundColor: '#7AA2FF',
+},
+featureContainer: {
+  marginTop: 24,
+  marginHorizontal:12,
+  padding:5
+},
+
+featureTitle: {
+  fontSize: 16,
+  fontWeight: '600',
+  marginBottom: 12,
+  color: '#000',
+},
+
+featureRow: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+},
+
+featureCard: {
+  width: '48%',
+  backgroundColor: '#fff',
+  borderRadius: 16,
+  padding: 16,
+  paddingVertical:30,
+  minHeight: 120,
+  shadowColor: '#000',
+  shadowOpacity: 0.08,
+  shadowRadius: 6,
+  elevation: 4,
+  //padding:10
+},
+
+featureCardTitle: {
+  fontSize: 15,
+  fontWeight: '600',
+  color: '#000',
+},
+
+featureCardSubtitle: {
+  fontSize: 13,
+  color: '#6B7280',
+  marginTop: 16,
+  lineHeight: 18,
+  marginBottom: 16,
+},
+
+arrowButtonf: {
+  position: 'absolute',
+  bottom: 6,
+  right: 12,
+  width: 36,
+  height: 36,
+  marginTop: 16,
+  borderRadius: 18,
+  backgroundColor: '#754595', // purple
+  justifyContent: 'center',
+  alignItems: 'center',
+},
+
+arrowIconf: {
+  width: 30,
+  height: 20,
+ // color:'#FFF',
+  tintColor: '#fff',
+},
+
+
 });

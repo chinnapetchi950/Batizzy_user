@@ -15,6 +15,8 @@ const Header = ({
   onPressSearchIcon,
   notiCount,
 }) => {
+  const [selectedTab, setSelectedTab] = React.useState('category');
+
   const navigation = useNavigation();
   return (
     <>
@@ -45,13 +47,25 @@ const Header = ({
         </View>
       </View>
       <TopBar
+  selectedTab={selectedTab}
+  onPresCategory={() => {
+    setSelectedTab('category');
+    navigation.navigate(routes.Category);
+  }}
+  onPresSell={() => {
+    setSelectedTab('sell');
+    navigation.navigate(routes.NewListing);
+  }}
+  onPressAdd={() => {}}
+/>
+      {/* <TopBar
         onPresSell={() => {
           navigation.navigate(routes.NewListing);
         }}
         onPresCategory={() => {
           navigation.navigate(routes.Category);
         }}
-      />
+      /> */}
     </>
   );
 };
@@ -92,19 +106,29 @@ const styles = StyleSheet.create({
     marginHorizontal: 7,
   },
   notificationCount: {
-    backgroundColor: 'red',
+    backgroundColor: '#FF7F36',
     paddingVertical: 0.5,
     paddingHorizontal: 2,
-    borderRadius: 10,
+    borderRadius: 9,
     color: 'white',
     fontSize: responsiveFontSize(1.2),
     textAlignVertical: 'center',
     fontFamily: FontFamily.InterBlack,
-    height: 20,
-    position: 'absolute',
+    textAlign:'center',
+    height: 18,
+    width:18,
     top: -7,
     left: 32,
-  },
+  position: 'absolute',
+          // better than left for badges
+  height: 18,
+  width: 18,          // same as height
+  borderRadius: 9,    // half of height
+  backgroundColor: 'red',
+  alignItems: 'center',
+  justifyContent: 'center',
+},
+  
   chatIcon: {
     height: hp(3),
     width: hp(3),

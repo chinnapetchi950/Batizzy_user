@@ -61,7 +61,14 @@ const BlogScreen = () => {
       .then(res => {
         setIsLoading(false);
         if (res.status === true) {
-          setCategoryData(res.data);
+         const forYouCategory = {
+  id: 'for_you',
+  name: t('common.forYou'),
+};
+
+setCategoryData([forYouCategory, ...res.data]);
+ 
+          //setCategoryData(res.data);
         }
       })
       .catch(error => {
@@ -169,23 +176,26 @@ const BlogScreen = () => {
       });
   };
 
-  const renderCategory = item => {
+  const renderCategory = (item,index) => {
+    console.log(item?.name,index,"item?.name");
+    
     return (
-      <View style={{padding: '2%'}}>
-        <View>
+      <View>
+        {/* <View>
           <ImageBackground source={icons.Bg} style={[styles.iconBGSize]}>
             <Image
               source={{uri: uploads_url + item?.image}}
               style={[styles.iconSize]}
             />
           </ImageBackground>
-        </View>
-        <Text style={[styles.iconText]}>
+        </View> */}
+        <Text style={[styles.iconText,{fontSize:14,color:item?.id==='for_you'?'#000':'#787878',fontWeight:item?.id==='for_you'?'700':'600',gap:10,marginHorizontal:index===0?0:10}]}>
+         {/* {item?.name} */}
           {selectedLanguage == 'fr' || item?.name_fr?.length > 18
             ? `${item?.name_fr?.slice(0, 18)}...`
             : selectedLanguage == 'de' || item?.name_de?.length > 18
             ? `${item?.name_de?.slice(0, 18)}...`
-            : `${item?.name?.slice(0, 30)}...`}
+            : `${item?.name}`}
         </Text>
       </View>
     );
@@ -215,9 +225,10 @@ const BlogScreen = () => {
             <Text
               style={{
                 color: '#fff', // White text color
-                fontSize: 14, // Adjust font size as needed
-                textAlign: 'center', // Center align the text
+                fontSize: 16, // Adjust font size as needed
+                //textAlign: 'center', // Center align the text
                 marginBottom: 4, // Space between lines
+                marginLeft:10
               }}>
               {moment(item?.created_at).fromNow() + ' '}
             </Text>
@@ -226,7 +237,7 @@ const BlogScreen = () => {
                 color: '#fff',
                 fontSize: 18,
                 fontWeight: 'bold', // Bold title text
-                textAlign: 'center',
+                //textAlign: 'center',
               }}>
               {selectedLanguage == 'fr' && item?.title_fr?.length > 30
                 ? `${item.title_fr.slice(0, 30)}...`
@@ -256,10 +267,8 @@ const BlogScreen = () => {
                 style={[styles.tradingImg]}
               />
               <View style={[styles.textContainer]}>
-                <Text style={[styles.dateText]}>
-                  {moment(item?.created_at).format('ddd, DD MMM YYYY')}
-                </Text>
-                <Text style={[styles.titileText]}>
+                
+                <Text numberOfLines={2} style={[styles.titileText]}>
                   {selectedLanguage == 'fr' && item?.title_fr?.length > 30
                     ? `${item.title_fr.slice(0, 30)}...`
                     : selectedLanguage == 'de' && item?.title_de?.length > 30
@@ -272,6 +281,10 @@ const BlogScreen = () => {
                     : selectedLanguage == 'de' && item?.content_de?.length > 90
                     ? `${item.content_de.slice(0, 90)}...`
                     : `${item.content.slice(0, 90)}...`}
+                </Text>
+
+                <Text style={[styles.dateText]}>
+                  {moment(item?.created_at).format('ddd, DD MMM YYYY')}
                 </Text>
               </View>
             </View>
@@ -409,15 +422,17 @@ const styles = StyleSheet.create({
     marginHorizontal: 7,
   },
   notificationCount: {
-    backgroundColor: 'red',
+    backgroundColor: '#FF7F36',
     paddingVertical: 0.5,
     paddingHorizontal: 2,
-    borderRadius: 10,
+    borderRadius: 9,
     color: 'white',
     fontSize: responsiveFontSize(1.2),
     textAlignVertical: 'center',
     fontFamily: FontFamily.InterBlack,
-    height: 20,
+    height: 18,
+    textAlign:'center',
+    width:18,
     position: 'absolute',
     top: -7,
     left: 32,
@@ -445,6 +460,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'center',
     padding: '1%',
+    
   },
   iconSize: {
     width: 45,
@@ -458,7 +474,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     textAlign: 'center',
     fontFamily: FontFamily.InterSemiBold,
-    width: 60,
+    //width: 60,
   },
   imageBG: {
     height: deviceHeight / 4,
@@ -474,9 +490,9 @@ const styles = StyleSheet.create({
   },
   imageBGContainer: {
     marginBottom: 10,
-    borderWidth: 1,
-    borderColor: Colors.borderColor,
-    borderRadius: 10,
+    // borderWidth: 1,
+    // borderColor: Colors.borderColor,
+    borderRadius: 15,
   },
   postTitle: {
     color: Colors.fontDarkGray,
@@ -487,6 +503,7 @@ const styles = StyleSheet.create({
   tradingImg: {
     height: 120,
     width: 120,
+    borderRadius:15
   },
   tradingImgcontaier: {
     flexDirection: 'row',
@@ -498,18 +515,21 @@ const styles = StyleSheet.create({
   titileText: {
     width: deviceWidth / 1.7,
     color: Colors.black,
-    fontSize: responsiveFontSize(1.6),
+    fontSize: responsiveFontSize(2.0),
     fontFamily: FontFamily.InterBold,
   },
   dateText: {
-    color: Colors.primary,
+    color:'#6B6B6B',
     fontSize: responsiveFontSize(1.6),
     fontFamily: FontFamily.InterSemiBold,
+        marginTop:10
+
   },
   descrText: {
     width: deviceWidth / 1.7,
     color: Colors.black,
-    fontSize: responsiveFontSize(1.6),
+    fontSize: responsiveFontSize(1.8),
     fontFamily: FontFamily.InterBlack,
+    
   },
 });

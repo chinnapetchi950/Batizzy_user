@@ -37,7 +37,7 @@ const PasswordInput = ({
         <TouchableOpacity
           onPress={onPressViewPassword}
           style={styles.iconContainer}>
-          <Image tintColor="#5F6368" source={source} style={styles.eyeIcon} />
+          <Image tintColor="#5F6368e" source={source} style={styles.eyeIcon} />
         </TouchableOpacity>
       </View>
     </>
@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop:hp(1),
     marginBottom: hp(2),
   },
   title: {
@@ -59,6 +60,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.inputBorder,
     borderRadius: 10,
+    paddingLeft: 10  
   },
   iconContainer: {
     padding: 5,
@@ -66,7 +68,8 @@ const styles = StyleSheet.create({
     right: 10,
   },
   eyeIcon: {
-    height: wp(5),
+    height:22,
+    width:22
   },
 });
 

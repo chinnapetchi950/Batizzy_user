@@ -59,6 +59,7 @@ import ChangePasswordScreen from '../screens/Profile/ChangePasswordScreen';
 import DeleteAccountScreen from '../screens/Profile/DeleteAccountScreen';
 import CompletedRequestScreen from '../screens/RequestsScreen/CompletedRequestScreen';
 import NotificationListScreen from '../screens/NotificationListScreen';
+import UniversalSearchScreen from '../screens/UniversalSearchScreen';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -177,6 +178,10 @@ const MainNavigator = () => {
           name={routes.NotificationListScreen}
           component={NotificationListScreen}
         />
+        <Stack.Screen
+          name={routes.UniversalSearch}
+          component={UniversalSearchScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -185,11 +190,34 @@ const MainNavigator = () => {
 const TabNavigator = () => {
   return (
     <Tab.Navigator
-      screenOptions={{headerShown: false}}
+      screenOptions={{headerShown: false,
+        //headerShown: false,
+        tabBarShowLabel: false, // Hides labels for a minimalist design
+        tabBarActiveTintColor: '#6200EE', // Active icon color
+        tabBarInactiveTintColor: '#808080', // Inactive icon color
+        tabBarStyle: {
+      position: 'absolute',
+      backgroundColor: '#754595',   // Purple bar
+      height: 62,
+      marginHorizontal: 10,
+      marginBottom: 5,
+      borderRadius: 40,
+      paddingHorizontal: 20,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      elevation: 10,
+      borderTopWidth: 0,
+    },
+    tabBarItemStyle: {
+      backgroundColor: 'transparent',
+    },
+      }}
+      
       tabBar={props => (
         <TabBar
           {...props}
-          onPressPlus={() => {
+          onPressPlus={() => {            
             const currentRoute = props.state.routes[props.state.index].name;
             if (currentRoute === routes.tab1) {
               navigate(routes.PostRequest);

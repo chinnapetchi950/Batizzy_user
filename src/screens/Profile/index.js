@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  StyleSheet,
 } from 'react-native';
 import {useTranslation} from 'react-i18next';
 import {StatusBarHeight, fontSize, hp, wp} from '../../helper/constants';
@@ -48,7 +49,12 @@ const Profile = () => {
     await AsyncStorage.setItem('deviceToken', deviceToken);
     commonActions(routes.Login);
   };
-
+  const ProfileCard = ({icon, title, onPress}) => (
+    <TouchableOpacity style={styles.card} onPress={onPress}>
+      <Image source={icon} style={styles.cardIcon} />
+      <Text style={styles.cardText}>{title}</Text>
+    </TouchableOpacity>
+  );
   return (
     <SafeAreaView
       style={{
@@ -58,385 +64,141 @@ const Profile = () => {
         justifyContent: 'space-between',
       }}>
       <View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            marginHorizontal: wp(4),
-            alignItems: 'center',
-            marginTop: '4%',
-          }}>
-          <View style={{flexDirection: 'row'}}>
-            {userData?.profile_image ? (
-              <Image
-                source={{uri: uploads_url + userData?.profile_image}}
-                style={{
-                  height: 50,
-                  width: 50,
-                  borderRadius: 30,
-                }}
-              />
-            ) : (
-              <Image
-                source={{uri: images.profileDummy}}
-                style={{
-                  height: 50,
-                  width: 50,
-                  borderRadius: 30,
-                }}
-              />
-            )}
-            <View>
-              <Text
-                numberOfLines={1}
-                style={{
-                  width: wp(55),
-                  fontFamily: 'Inter-SemiBold',
-                  color: Colors.primary,
-                  fontSize: fontSize(17),
-                  marginHorizontal: wp(4),
-                }}>
-                {userData?.name}
-              </Text>
-              <Text
-                style={{
-                  fontFamily: 'Inter-Medium',
-                  color: '#444444',
-                  fontSize: fontSize(10),
-                  marginHorizontal: wp(4),
-                }}>
-                {userData?.email}
-              </Text>
+        <View style={styles.header}>
+          <View style={styles.profileRow}>
+            <Image
+              source={
+                userData?.profile_image
+                  ? {uri: uploads_url + userData.profile_image}
+                  : images.profileDummy
+              }
+              style={styles.profileImage}
+            />
+
+            <View style={styles.profileInfo}>
+              <Text style={styles.nameText}>{userData?.name}</Text>
+              <Text style={styles.emailText}>{userData?.email}</Text>
             </View>
           </View>
 
           <TouchableOpacity
-            onPress={() => {
-              navigate(routes.EditProfileScreen);
-            }}>
-            <ImageBackground
-              source={icons.Bg}
-              style={{height: 40, width: 40, justifyContent: 'center'}}>
-              <Image
-                source={icons.editIcon}
-                style={{
-                  height: 20,
-                  width: 20,
-                  tintColor: Colors.grayFont,
-                  alignItems: 'center',
-                  alignSelf: 'center',
-                }}
-              />
-            </ImageBackground>
+            style={styles.editBtn}
+            onPress={() => navigate(routes.EditProfileScreen)}>
+            <Image source={icons.editIcon} style={styles.editIcon} />
           </TouchableOpacity>
         </View>
-        <View
+
+        {/* <View
           style={{
             marginHorizontal: '4%',
             borderWidth: 0.5,
             borderColor: Colors.borderColor,
             marginTop: '4%',
           }}
-        />
+        /> */}
 
-        <TouchableOpacity
-          onPress={() => {
-            navigate(routes.RequestsScreen);
-          }}
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            marginHorizontal: '4%',
-            alignItems: 'center',
-            marginTop: '6%',
-          }}>
-          <View style={{flexDirection: 'row'}}>
-            <Image
-              resizeMode="contain"
-              source={icons.request}
-              style={{
-                height: hp(2.74),
-                width: hp(2.74),
-              }}
-            />
-            <View>
-              <Text
-                style={{
-                  fontFamily: 'Inter-Regular',
-                  color: '#000000',
-                  fontSize: fontSize(11),
-                  marginHorizontal: wp(4),
-                }}>
-                {t('home.requests')}
-              </Text>
-            </View>
-          </View>
-          <TouchableOpacity>
-            <Image
-              resizeMode="contain"
-              source={icons.smallRight}
-              style={{
-                height: hp(1.5),
-                width: hp(1.5),
-              }}
-            />
-          </TouchableOpacity>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            navigate(routes.ChatScreen);
-          }}
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            marginHorizontal: wp(4),
-            alignItems: 'center',
-            marginTop: hp(3.42),
-          }}>
-          <View style={{flexDirection: 'row'}}>
-            <Image
-              resizeMode="contain"
-              source={icons.star}
-              style={{
-                height: hp(2.74),
-                width: hp(2.74),
-              }}
-            />
-            <View>
-              <Text
-                style={{
-                  fontFamily: 'Inter-Regular',
-                  color: '#000000',
-                  fontSize: fontSize(11),
-                  marginHorizontal: wp(4),
-                }}>
-                {t('chat')}
-              </Text>
-            </View>
-          </View>
-          <TouchableOpacity
-            onPress={() => {
-              navigate(routes.ChatScreen);
-            }}>
-            <Image
-              resizeMode="contain"
-              source={icons.smallRight}
-              style={{
-                height: hp(1.5),
-                width: hp(1.5),
-              }}
-            />
-          </TouchableOpacity>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            navigate(routes.AboutScreen, {screenName: 'about_us'});
-          }}
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            marginHorizontal: wp(4),
-            alignItems: 'center',
-            marginTop: hp(3.42),
-          }}>
-          <View style={{flexDirection: 'row'}}>
-            <Image
-              resizeMode="contain"
-              source={icons.infoI}
-              style={{
-                height: hp(2.74),
-                width: hp(2.74),
-              }}
-            />
-            <View>
-              <Text
-                style={{
-                  fontFamily: 'Inter-Regular',
-                  color: '#000000',
-                  fontSize: fontSize(11),
-                  marginHorizontal: wp(4),
-                }}>
-                {t('settings.aboutUs')}
-              </Text>
-            </View>
-          </View>
-          <TouchableOpacity>
-            <Image
-              onPress={() => {
-                navigate(routes.AboutScreen);
-              }}
-              resizeMode="contain"
-              source={icons.smallRight}
-              style={{
-                height: hp(1.5),
-                width: hp(1.5),
-              }}
-            />
-          </TouchableOpacity>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            navigate(routes.HelpScreen);
-          }}
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            marginHorizontal: wp(4),
-            alignItems: 'center',
-            marginTop: hp(3.42),
-          }}>
-          <View style={{flexDirection: 'row'}}>
-            <Image
-              resizeMode="contain"
-              source={icons.help}
-              style={{
-                height: hp(2.74),
-                width: hp(2.74),
-              }}
-            />
-            <View>
-              <Text
-                style={{
-                  fontFamily: 'Inter-Regular',
-                  color: '#000000',
-                  fontSize: fontSize(11),
-                  marginHorizontal: wp(4),
-                }}>
-                {t('settings.helpCenter')}
-              </Text>
-            </View>
-          </View>
-          <TouchableOpacity
-            onPress={() => {
-              navigate(routes.HelpScreen);
-            }}>
-            <Image
-              resizeMode="contain"
-              source={icons.smallRight}
-              style={{
-                height: hp(1.5),
-                width: hp(1.5),
-              }}
-            />
-          </TouchableOpacity>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            navigate(routes.SettingScreen);
-          }}
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            marginHorizontal: wp(4),
-            alignItems: 'center',
-            marginTop: hp(3.42),
-          }}>
-          <View style={{flexDirection: 'row'}}>
-            <Image
-              resizeMode="contain"
-              source={icons.setting}
-              style={{
-                height: hp(2.74),
-                width: hp(2.74),
-              }}
-            />
-            <View>
-              <Text
-                style={{
-                  fontFamily: 'Inter-Regular',
-                  color: '#000000',
-                  fontSize: fontSize(11),
-                  marginHorizontal: wp(4),
-                }}>
-                {t('settings.settings')}
-              </Text>
-            </View>
-          </View>
-          <TouchableOpacity
-            onPress={() => {
-              navigate(routes.SettingScreen);
-            }}>
-            <Image
-              resizeMode="contain"
-              source={icons.smallRight}
-              style={{
-                height: hp(1.5),
-                width: hp(1.5),
-              }}
-            />
-          </TouchableOpacity>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            marginHorizontal: wp(4),
-            alignItems: 'center',
-            marginTop: hp(3.42),
-          }}>
-          <View style={{flexDirection: 'row'}}>
-            <Image
-              resizeMode="contain"
-              source={icons.notificationIcon}
-              style={{
-                height: hp(2.74),
-                width: hp(2.74),
-                tintColor: Colors.primary,
-              }}
-            />
-            <View>
-              <Text
-                style={{
-                  fontFamily: 'Inter-Regular',
-                  color: '#000000',
-                  fontSize: fontSize(11),
-                  marginHorizontal: wp(4),
-                }}>
-                {t('settings.notification')}
-              </Text>
-            </View>
-          </View>
-
-          <Switch
-            trackColor={{false: '#767577', true: Colors.gray}}
-            thumbColor={isEnabled ? Colors.primary : '#f4f3f4'}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={toggleSwitch}
-            value={isEnabled}
+        <View style={styles.grid}>
+          <ProfileCard
+            icon={icons.request}
+            title={t('home.requests')}
+            onPress={() => navigate(routes.RequestsScreen)}
           />
-        </TouchableOpacity>
-        <View>
+
+          <ProfileCard
+            icon={icons.star}
+            title={t('chat')}
+            onPress={() => navigate(routes.ChatScreen)}
+          />
+
+          <ProfileCard
+            icon={icons.infoI}
+            title={t('settings.aboutUs')}
+            onPress={() => navigate(routes.AboutScreen)}
+          />
+
+          <ProfileCard
+            icon={icons.help}
+            title={t('settings.helpCenter')}
+            onPress={() => navigate(routes.HelpScreen)}
+          />
+
+          <ProfileCard
+            icon={icons.tab4}
+            title={t('marketPlace')}
+            onPress={() => navigate(routes.MarketPlace)}
+          />
+
+<ProfileCard
+            icon={icons.community}
+            title={t('Community')}
+            onPress={() => navigate(routes.MarketPlace)}
+          />
+          <ProfileCard
+            icon={icons.tab5}
+            title={t('Blog')}
+            onPress={() => navigate(routes.MarketPlace)}
+          />
+          <ProfileCard
+            icon={icons.setting}
+            title={t('settings.settings')}
+            onPress={() => navigate(routes.SettingScreen)}
+          />
+        </View>
+        <View style={styles.bottomSection}>
+          <View style={styles.rowItem}>
+            <Image source={icons.profile_notify} style={styles.rowIcon} />
+            <Text style={styles.rowText}>{t('settings.notification')}</Text>
+
+            <Switch
+              value={isEnabled}
+              onValueChange={toggleSwitch}
+              thumbColor={Colors.primary}
+            />
+          </View>
           <TouchableOpacity
-            onPress={() => {
-              setIsLogoutModalVisible(true);
+            onPress={() => setIsLogoutModalVisible(true)}
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              marginHorizontal: wp(1),
+              alignItems: 'center',
+              marginTop: hp(3.42),
             }}>
-            <Text
-              numberOfLines={1}
-              style={{
-                fontFamily: 'Inter-SemiBold',
-                color: Colors.primary,
-                fontSize: fontSize(13),
-                borderWidth: 1,
-                paddingVertical: hp(1.5),
-                borderRadius: 30,
-                textAlign: 'center',
-                borderColor: Colors.primary,
-                margin: '4%',
-                marginTop: '20%',
-              }}>
+            
+            <View style={{flexDirection: 'row'}}>
+              
+              <Image
+                resizeMode="contain"
+                source={icons.Logout}
+                style={{height: hp(2.74), width: hp(2.74)}}
+              />
+              <View>
+                
+                <Text
+                  style={[styles.rowText,{marginLeft:10}]}>
+                 
+                  {t('settings.logoutConfirmation.logout')}
+                </Text>
+              </View>
+            </View>
+            <TouchableOpacity
+               onPress={() => setIsLogoutModalVisible(true)}>
+             
+              <Image
+                resizeMode="contain"
+                source={icons.smallRight}
+                style={{height: hp(1.5), width: hp(1.5)}}
+              />
+            </TouchableOpacity>
+          </TouchableOpacity>
+          {/* <TouchableOpacity
+            style={styles.logoutRow}
+            onPress={() => setIsLogoutModalVisible(true)}>
+            <Image source={icons.logout} style={styles.rowIcon} />
+            <Text style={styles.rowText}>
               {t('settings.logoutConfirmation.logout')}
             </Text>
-          </TouchableOpacity>
-          {/* <Text
-            style={{
-              fontFamily: 'Inter-Regular',
-              color: '#000000',
-              fontSize: fontSize(13),
-              textAlign: 'center',
-              marginBottom: hp(2.5),
-            }}>
-            Version
-          </Text> */}
+          </TouchableOpacity> */}
         </View>
       </View>
 
@@ -522,3 +284,120 @@ const Profile = () => {
   );
 };
 export default Profile;
+const styles = StyleSheet.create({
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: wp(5),
+    marginTop: hp(2),
+  },
+
+  profileRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  profileImage: {
+    height: 56,
+    width: 56,
+    borderRadius: 28,
+  },
+
+  profileInfo: {
+    marginLeft: wp(4),
+  },
+
+  nameText: {
+    fontSize: fontSize(18),
+    fontFamily: 'Inter-SemiBold',
+    color: '#000',
+  },
+
+  emailText: {
+    fontSize: fontSize(12),
+    color: '#000',
+    marginTop:5,
+  },
+
+  editBtn: {
+    height: 40,
+    width: 40,
+    borderRadius: 20,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 4,
+  },
+
+  editIcon: {
+    height: 18,
+    width: 18,
+    tintColor: Colors.primary,
+  },
+
+  grid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    paddingHorizontal: wp(5),
+    marginTop: hp(4),
+  },
+
+  card: {
+    width: '48%',
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    padding: wp(2.6),
+    marginBottom: hp(2),
+    elevation: 5,
+  },
+
+  cardIcon: {
+  height: 25,          // increase height
+  width: 25,           // make it square
+  resizeMode: 'contain', // 🔥 VERY IMPORTANT
+  tintColor: Colors.primary,
+  marginBottom: hp(1),
+},
+
+  cardText: {
+    fontSize: fontSize(13),
+    fontFamily: 'Inter-Medium',
+    color: '#000',
+  },
+
+  bottomSection: {
+    marginTop: hp(3),
+    borderTopWidth: 1,
+    borderColor: '#eee',
+    paddingHorizontal: wp(5),
+  },
+
+  rowItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: hp(2),
+    justifyContent: 'space-between',
+  },
+
+  logoutRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: hp(2),
+  },
+
+  rowIcon: { 
+    height: 22,
+    width: 22,
+    tintColor: Colors.primary,
+    marginRight: wp(3),
+  },
+
+  rowText: {
+    fontSize: fontSize(14),
+    fontFamily: 'Inter-Medium',
+    color: '#000',
+    flex: 1,
+  },
+});

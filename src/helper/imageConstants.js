@@ -4,10 +4,13 @@ export const images = {
   profileDummy:
     'http://test1.pillersofttechnologies.com/assets/images/profile.png',
   coverDummy: 'http://test1.pillersofttechnologies.com/assets/images/cover.png',
+  requestBg:require('../../assets/icons/requestbg.png'),
+  suggestionBg:require('../../assets/icons/suggestionBg.png'),
+  helpbg:require('../../assets/icons/helpBg.png')
 };
 
 export const icons = {
-  Intro1: require('../../assets/icons/Intro1.png'),
+  Intro1: require('../../assets/icons/loginIcon.png'),
   introBottom: require('../../assets/icons/introBottom.png'),
   IntroRightArrow: require('../../assets/icons/IntroRightArrow.png'),
   view: require('../../assets/icons/view.png'),
@@ -72,9 +75,9 @@ export const icons = {
   expIcon: require('../../assets/icons/expIcon.png'),
   LikeFillIcon: require('../../assets/icons/LikeFillIcon.png'),
   RectangleIcon: require('../../assets/icons/RectangleIcon.png'),
-  suggestionIcon: require('../../assets/icons/suggestionIcon.png'),
-  requestIcon: require('../../assets/icons/requestIcon.png'),
-  helpIcon: require('../../assets/icons/helpIcon.png'),
+  suggestionIcon: require('../../assets/icons/suggestionIcons.png'),
+  requestIcon: require('../../assets/icons/requesticons.png'),
+  helpIcon: require('../../assets/icons/helpIcons.png'),
   RightSideMoveBlueIcon: require('../../assets/icons/RightSideMoveBlueIcon.png'),
   bussinessIcon: require('../../assets/icons/bussinessIcon.png'),
   TraininggIcon: require('../../assets/icons/TraininggIcon.png'),
@@ -105,4 +108,23 @@ export const icons = {
   suggestion: require('../../assets/icons/suggestions.png'),
   link: require('../../assets/icons/link.png'),
   emailOpen: require('../../assets/icons/email-open.png'),
+  arrowRight:require('../../assets/icons/arrowRight.png'),
+  Logout:require('../../assets/icons/Logout.png'),
+  community:require('../../assets/icons/community.png'),
+  send_fill:require('../../assets/icons/send_fill.png'),
+  profile_notify:require('../../assets/icons/profile_notify.png')
 };
+export const onboardingImages = [
+  {
+    bg: require('../../assets/icons/introbg.png'),
+    image: require('../../assets/icons/intro1.png'),
+  },
+  {
+    bg: require('../../assets/icons/introbg.png'),
+    image: require('../../assets/icons/intro2.png'),
+  },
+  {
+    bg: require('../../assets/icons/introbg.png'),
+    image: require('../../assets/icons/intro3.png'),
+  },
+];

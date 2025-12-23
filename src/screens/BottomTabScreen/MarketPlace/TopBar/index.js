@@ -1,74 +1,156 @@
 import React from 'react';
-import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
-import {useTranslation} from 'react-i18next';
-import {icons} from '../../../../helper/imageConstants';
-import {hp, wp} from '../../../../helper/constants';
-import {responsiveFontSize} from 'react-native-responsive-dimensions';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { icons } from '../../../../helper/imageConstants';
+import { hp, wp } from '../../../../helper/constants';
+import { responsiveFontSize } from 'react-native-responsive-dimensions';
 
-const TopBar = ({onPresSell, onPresCategory}) => {
-  const {t} = useTranslation();
+const TopBar = ({
+  onPresSell,
+  onPresCategory,
+  onPressAdd,
+  selectedTab,
+}) => {
+  const { t } = useTranslation();
+
   return (
-    <View style={styles.wrapper}>
-      <Pressable style={styles.sellTabContainer} onPress={onPresSell}>
-        <Image source={icons.sellIcon} style={styles.selltabIcon} />
-        <Text style={styles.selltabtext}>{t('marketplace.sell')}</Text>
-      </Pressable>
-      <View style={styles.seperator} />
-      <Pressable style={styles.categoryTabContainer} onPress={onPresCategory}>
-        <Image source={icons.CategoryIcon} style={styles.categorytabIcon} />
-        <Text style={styles.categorytabtext}>{t('marketplace.category')}</Text>
-      </Pressable>
+    <View style={{ marginHorizontal: 40 }}>
+      <View style={styles.container}>
+
+        {/* Category */}
+        <Pressable style={styles.leftSection} onPress={onPresCategory}>
+          <View
+            style={[
+              styles.iconWrapper,
+              { backgroundColor: selectedTab === 'category' ? '#FFF' : '#000' },
+            ]}
+          >
+            <Image
+              source={icons.CategoryIcon}
+              style={[
+                styles.icon,
+                { tintColor: selectedTab === 'category' ? '#000' : '#FFF' },
+              ]}
+            />
+          </View>
+
+          <Text
+            style={[
+              styles.categoryText,
+              { color: selectedTab === 'category' ? '#FFF' : '#AAA' },
+            ]}
+          >
+            {t('marketplace.category')}
+          </Text>
+        </Pressable>
+
+        {/* Right Section */}
+        <View style={styles.leftSection}>
+          <Pressable onPress={onPresSell}>
+            <Text
+              style={[
+                styles.sellText,
+                { color: selectedTab === 'sell' ? '#FFF' : '#AAA' },
+              ]}
+            >
+              {t('marketplace.sell')}
+            </Text>
+          </Pressable>
+
+          {/* Plus Button */}
+          <Pressable
+            style={[
+              styles.addButton,
+              { backgroundColor: selectedTab === 'sell' ? '#FFF' : '#000' },
+            ]}
+            onPress={onPressAdd}
+          >
+            <Text
+              style={[
+                styles.plusText,
+                { color: selectedTab === 'sell' ? '#000' : '#FFF' },
+              ]}
+            >
+              +
+            </Text>
+          </Pressable>
+        </View>
+
+      </View>
     </View>
   );
 };
+
 export default TopBar;
 
+
+
 const styles = StyleSheet.create({
-  wrapper: {
+  container: {
     marginTop: hp(3),
     flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#000',
+    borderRadius: 30,
+    paddingHorizontal: wp(4),
+    paddingVertical: hp(1),
+    justifyContent: 'space-between',
+    shadowColor: '#000',
+    shadowOpacity: 0.05,
+    shadowRadius: 10,
+    elevation: 3,
   },
-  sellTabContainer: {
-    flex: 1,
+
+  leftSection: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#75459559',
-    paddingVertical: hp(0.8),
+  },
+
+  iconWrapper: {
+    height: hp(4),
+    width: hp(4),
+    borderRadius: hp(2),
+    backgroundColor: '#fff',
     justifyContent: 'center',
-    borderRadius: 20,
-  },
-  selltabIcon: {
-    height: hp(2.4),
-    width: hp(2.4),
-    resizeMode: 'contain',
-  },
-  selltabtext: {
-    fontSize: responsiveFontSize(1.64),
-    fontFamily: 'Inter-SemiBold',
-    marginLeft: wp(1.6),
-    color: '#754595',
-  },
-  categoryTabContainer: {
-    flex: 1,
-    flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FECC1659',
-    paddingVertical: hp(0.8),
-    justifyContent: 'center',
-    borderRadius: 20,
+    marginRight: wp(2),
   },
-  categorytabIcon: {
-    height: hp(2.4),
-    width: hp(2.4),
+
+  icon: {
+    height: hp(2),
+    width: hp(2),
+    tintColor: '#000',
     resizeMode: 'contain',
   },
-  categorytabtext: {
-    fontSize: responsiveFontSize(1.64),
+
+  categoryText: {
+    fontSize: responsiveFontSize(1.7),
     fontFamily: 'Inter-SemiBold',
-    marginLeft: wp(1.6),
-    color: '#FECC16',
+    color: '#FFF',
   },
-  seperator: {
-    marginHorizontal: 17,
+
+  sellText: {
+    fontSize: responsiveFontSize(1.7),
+    fontFamily: 'Inter-Medium',
+    color: '#FFF',
+    marginRight:20
+  },
+
+  addButton: {
+    height: hp(4.5),
+    width: hp(4.5),
+    borderRadius: hp(2.25),
+    backgroundColor: '#000',
+    borderWidth: 1,
+    borderColor: '#FFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  plusText: {
+    fontSize: responsiveFontSize(2.8),
+    fontFamily: 'Inter-Bold',
+    color: '#FFF',
   },
 });
+

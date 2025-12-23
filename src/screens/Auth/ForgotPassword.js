@@ -85,9 +85,9 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     padding: 20,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    elevation: 3,
+    // borderTopLeftRadius: 30,
+    // borderTopRightRadius: 30,
+    // elevation: 3,
   },
   title: {
     color: 'black',

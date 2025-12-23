@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import {useTranslation} from 'react-i18next';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
-import {icons} from '../../helper/imageConstants';
+import {icons, images} from '../../helper/imageConstants';
 import {hp, wp} from '../../helper/constants';
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import CustomSearchBar from '../../common/CustomSearchBar';
@@ -194,14 +194,15 @@ const SocialTab = () => {
     const renderMedia = ({item, index}) => {
       if (item?.type === 'image') {
         return (
-          <Pressable onPress={() => setIsFullScreenVisible(true)}>
+          <Pressable style={{marginHorizontal:10}} onPress={() => setIsFullScreenVisible(true)}>
             <Image
               source={{uri: item?.uri}}
               style={{
                 height: hp(30),
-                width: '98%',
-                borderRadius: 15,
-                marginLeft: 3,
+                width: '96%',
+                borderRadius: 25,
+                marginLeft: 10,
+                // marginHorizontal:10
               }} // Adjust the width for better UI
               key={'media' + index}
             />
@@ -212,10 +213,11 @@ const SocialTab = () => {
           <View
             style={{
               height: hp(30),
-              width: '98%',
+              width: '96%',
               borderRadius: 15,
-              marginLeft: 3,
+              marginLeft: 10,
               overflow: 'hidden',
+              marginHorizontal:10
             }}>
             <Video
               source={{uri: item?.uri}}
@@ -238,44 +240,19 @@ const SocialTab = () => {
 
     return (
       <View key={'card' + index} style={styles.card}>
-        {post.attachments.length === 0 ? (
-          <View style={styles.plainViewContainer}>
-            <Text style={styles.plainViewText}>{post.content}</Text>
-          </View>
-        ) : (
-          <>
-            <Carousel
-              data={mediaItems}
-              renderItem={renderMedia}
-              sliderWidth={screenWidth}
-              itemWidth={screenWidth}
-              onSnapToItem={index => setActiveIndex(index)} // Update active index on snap
-            />
-            {mediaItems?.length > 1 && (
-              <View style={styles.pagination}>
-                {mediaItems.map((_, index) => (
-                  <View
-                    key={'slider' + index}
-                    style={[
-                      styles.dot,
-                      index === activeIndex ? styles.activeDot : null,
-                    ]}
-                  />
-                ))}
-              </View>
-            )}
-          </>
-        )}
-        <FullScreenImageViewer
-          isVisible={isFullScreenVisible}
-          images={mediaItems.filter((item, i) => item.type === 'image')}
-          currentIndex={activeIndex}
-          onClose={() => setIsFullScreenVisible(false)}
-        />
-
-        <View style={styles.detailsContainer}>
-          <View style={styles.dotContainer}>
+        {console.log(post?.user?.profile_image,"post?.user?")}
+         <View style={styles.dotContainer}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
+               <Pressable>
+  <Image
+    source={
+      post?.user?.profile_image
+        ? { uri: uploads_url + post.user.profile_image }
+        : icons.dummyUser
+    }
+    style={styles.profileImage}
+  />
+</Pressable>
               <Pressable
                 onPress={() => {
                   if (loginUserID === post?.user?.id) {
@@ -336,6 +313,43 @@ const SocialTab = () => {
               </View>
             )}
           </View>
+        {post.attachments.length === 0 ? (
+          <View style={styles.plainViewContainer}>
+            <Text style={styles.plainViewText}>{post.content}</Text>
+          </View>
+        ) : (
+          <>
+            <Carousel
+              data={mediaItems}
+              renderItem={renderMedia}
+              sliderWidth={screenWidth}
+              itemWidth={screenWidth}
+              onSnapToItem={index => setActiveIndex(index)} // Update active index on snap
+            />
+            {mediaItems?.length > 1 && (
+              <View style={styles.pagination}>
+                {mediaItems.map((_, index) => (
+                  <View
+                    key={'slider' + index}
+                    style={[
+                      styles.dot,
+                      index === activeIndex ? styles.activeDot : null,
+                    ]}
+                  />
+                ))}
+              </View>
+            )}
+          </>
+        )}
+        <FullScreenImageViewer
+          isVisible={isFullScreenVisible}
+          images={mediaItems.filter((item, i) => item.type === 'image')}
+          currentIndex={activeIndex}
+          onClose={() => setIsFullScreenVisible(false)}
+        />
+
+        <View style={styles.detailsContainer}>
+         
           <Text style={styles.time}>
             {post?.created_at_hrf} {post?.suggestedText}
           </Text>
@@ -847,6 +861,7 @@ const SocialTab = () => {
               : icons.dummyUser
           }
           onBackPress={{}}
+          IssearchIcon={false}
           onSearch={handleSearch}
           placeholder={t('socialPostScreen.placeholder')}
         />
@@ -981,6 +996,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFFFF',
   },
+  profileImage: {
+  height: hp(3.3),
+  width: hp(3.3),
+  borderRadius: hp(3.3) / 2, // perfectly circular
+  resizeMode: 'cover',       // ensures image fills the circle
+  overflow: 'hidden',        // clips any extra parts
+},
   container: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -1039,15 +1061,17 @@ const styles = StyleSheet.create({
     // marginHorizontal: 7,
   },
   notificationCount: {
-    backgroundColor: 'red',
+    backgroundColor: '#FF7F36',
     paddingVertical: 0.5,
     paddingHorizontal: 2,
-    borderRadius: 10,
+    borderRadius: 9,
     color: 'white',
     fontSize: responsiveFontSize(1.2),
     textAlignVertical: 'center',
     fontFamily: FontFamily.InterBlack,
-    height: 20,
+    height: 18,
+    width:18,
+    textAlign:'center',
     position: 'absolute',
     top: -7,
     left: 20,
@@ -1076,6 +1100,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     marginVertical: 8,
+    marginHorizontal:10
   },
   activeDot: {
     width: 10,
@@ -1096,6 +1121,7 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
   },
   username: {
+    marginLeft: 8, 
     fontSize: responsiveFontSize(1.88),
     fontFamily: 'Nunito-Medium',
     color: '#1D1D1D',
@@ -1152,6 +1178,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginHorizontal:15,
+    marginBottom:10
   },
   //////
   commentMainContainer: {

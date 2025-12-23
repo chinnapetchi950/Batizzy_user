@@ -69,11 +69,12 @@
     "servicesRequired": "Services Required:",
     "words": "words",
     "takePicture": "Take Picture",
-    "fetchingLocation": "Fetching location..."
+    "fetchingLocation": "Fetching location...",
+    "forYou":"For You"
   },
 "signup": {
-  "signup_title": "Sign Up",
-  "signup_subtitle": "Create a new account",
+  "signup_title": "Create an account",
+  "signup_subtitle": "Start your journey towards seamless communication today",
   "label_full_name": "Full Name",
   "placeholder_full_name": "Enter your full name",
   "label_phone_number": "Phone Number",
@@ -81,11 +82,11 @@
   "placeholder_search": "Search",
   "label_email": "Email",
   "placeholder_email": "Enter your email",
-  "label_password": "Password",
+  "label_password": "Password *",
   "placeholder_password": "Enter your password",
-  "label_confirm_password": "Confirm Password",
+  "label_confirm_password": "Confirm Password *",
   "placeholder_confirm_password": "Confirm your password",
-  "label_gender": "Gender",
+  "label_gender": "Gender *",
   "label_gender_male": "Male",
   "label_gender_female": "Female",
   "label_gender_others": "Others",
@@ -516,7 +517,7 @@
   },
   "socialPostScreen": {
     "greeting": "Hello",
-    "placeholder": "What's on your mind?",
+    "placeholder": "Write something here!",
     "comments": "Comments",
     "writeReply": "Write a reply...",
     "addComment": "Add a comment...",
@@ -546,7 +547,8 @@
     "projectName": "Project Name",
     "completionDate": "Completion Date",
     "status": "Status",
-    "businessPartners": "Business Partners"
+    "businessPartners": "Business Partners",
+    "contractorOfTheMonth":"Contractor of the Month"
   },
   "request": {
     "requests": "Requests",
