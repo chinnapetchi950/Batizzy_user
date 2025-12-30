@@ -112,7 +112,10 @@ export const icons = {
   Logout:require('../../assets/icons/Logout.png'),
   community:require('../../assets/icons/community.png'),
   send_fill:require('../../assets/icons/send_fill.png'),
-  profile_notify:require('../../assets/icons/profile_notify.png')
+  profile_notify:require('../../assets/icons/profile_notify.png'),
+  france: require('../../assets/icons/france.png'),
+  english: require('../../assets/icons/english.png'),
+  german: require('../../assets/icons/german.png'),
 };
 export const onboardingImages = [
   {
@@ -127,4 +130,5 @@ export const onboardingImages = [
     bg: require('../../assets/icons/introbg.png'),
     image: require('../../assets/icons/intro3.png'),
   },
+  
 ];
