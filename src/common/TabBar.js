@@ -17,7 +17,7 @@ const TAB_ICONS = {
   [routes.tab1]: require('../../assets/icons/tab1.png'),
   [routes.SocialTab]: require('../../assets/icons/tab2.png'),
   [routes.MarketPlace]: require('../../assets/icons/tab4.png'),
-  [routes.ChatScreen]: require('../../assets/icons/star.png'),
+  [routes.ChatScreen]: require('../../assets/icons/chat.png'),
   [routes.Profile]: require('../../assets/icons/tab6.png'), // fallback
 };
 
@@ -60,6 +60,7 @@ console.log('Profile image:', userData?.profile_image);
           }
           style={[
             styles.icon,
+            routeName==='Home'??styles.icon_1,
             isProfileTab && profileImage && styles.profileIcon,
             !isProfileTab && {
               tintColor: isFocused ? '#754595' : '#fff',
@@ -84,7 +85,8 @@ console.log('Profile image:', userData?.profile_image);
           style={styles.tabItem}>
           <Image
             source={require('../../assets/icons/plusIcon.png')}
-            style={[styles.icon, {tintColor: '#fff'}]}
+            style={[styles.icon, {tintColor: '#FFF',width: 38,
+  height: 28,}]}
           />
         </TouchableOpacity>
 
@@ -167,6 +169,10 @@ tabItem: {
 icon: {
   width: 24,
   height: 24,
+},
+icon_1: {
+  width: 38,
+  height: 28,
 },
 
 profileIcon: {

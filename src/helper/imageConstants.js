@@ -116,6 +116,7 @@ export const icons = {
   france: require('../../assets/icons/france.png'),
   english: require('../../assets/icons/english.png'),
   german: require('../../assets/icons/german.png'),
+  chat: require('../../assets/icons/chat.png'),
 };
 export const onboardingImages = [
   {
