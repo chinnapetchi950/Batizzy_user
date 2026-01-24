@@ -563,7 +563,8 @@
 "completionDate": "Fertigstellungsdatum",
 "status": "Status",
 "businessPartners": "Geschäftspartner",
-"contractorOfTheMonth": "Handwerker des Monats"
+"contractorOfTheMonth": "Handwerker des Monats",
+"FeatureHighlights":"Feature-Highlights"
   },
   "request": {
     "requests": "Anfragen",

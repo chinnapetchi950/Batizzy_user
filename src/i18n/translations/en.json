@@ -548,7 +548,8 @@
     "completionDate": "Completion Date",
     "status": "Status",
     "businessPartners": "Business Partners",
-    "contractorOfTheMonth":"Contractor of the Month"
+    "contractorOfTheMonth":"Contractor of the Month",
+    "FeatureHighlights":"Feature Highlights"
   },
   "request": {
     "requests": "Requests",

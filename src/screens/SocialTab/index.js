@@ -1279,6 +1279,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 20,
+    marginBottom:40,
   },
   selectedCommentImageContainer: {
     height: 1,

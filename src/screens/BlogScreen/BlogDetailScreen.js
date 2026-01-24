@@ -92,8 +92,11 @@ const BlogDetailScreen = props => {
           </View>
         </View>
       </View>
-      <View style={{padding: 20}}>
-        <Image
+<ScrollView
+  contentContainerStyle={{padding: 20}}
+  showsVerticalScrollIndicator={false}
+>        
+<Image
           source={{
             uri: blogData?.image
               ? uploads_url + blogData?.image
@@ -118,7 +121,7 @@ const BlogDetailScreen = props => {
             ? blogData?.content_de
             : blogData?.content}
         </Text>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

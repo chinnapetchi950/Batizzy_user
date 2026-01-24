@@ -559,7 +559,9 @@
 "completionDate": "Date d’achèvement",
 "status": "Statut",
 "businessPartners": "Partenaires commerciaux",
-"contractorOfTheMonth": "Entrepreneur du mois"
+"contractorOfTheMonth": "Entrepreneur du mois",
+"FeatureHighlights":"Caractéristiques principales"
+
   },
   "request": {
     "requests": "Demandes",

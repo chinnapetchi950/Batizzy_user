@@ -469,15 +469,15 @@ const ProductDetails = () => {
                   {t('productdetails.sellerInformation')}
                 </Text>
 
-                <TouchableOpacity onPress={() => gotoSellerProfile()}>
+                {/* <TouchableOpacity onPress={() => gotoSellerProfile()}>
                   <Text style={styles.SellerProfileText}>
                     {t('productdetails.sellerProfile')}
                   </Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
               </View>
             )}
             {isMarketPlaceDetailData?.user?.id != isUserId && (
-              <View style={styles.sellerInfo}>
+              <Pressable onPress={() => gotoSellerProfile()} style={styles.sellerInfo}>
                 {isMarketPlaceDetailData?.user?.profile_image ? (
                   <Image
                     source={{
@@ -515,7 +515,7 @@ const ProductDetails = () => {
                     {followButtonText}
                   </Text>
                 </Pressable>
-              </View>
+              </Pressable>
             )}
             {isMarketPlaceDetailData?.user?.id != isUserId && (
               <View style={styles.grayLine} />

@@ -538,7 +538,7 @@ const renderCarouselItem = (item, index) => {
 </View>
 
           <View style={styles.featureContainer}>
-  <Text style={styles.featureTitle}>Feature Highlights</Text>
+  <Text style={styles.featureTitle}>{t('home.FeatureHighlights')}</Text>
 
   <View style={styles.featureRow}>
     {/* Contractor of the Month */}
@@ -593,7 +593,7 @@ const renderCarouselItem = (item, index) => {
                   source={icons.TraininggIcon}
                   style={styles.RightSideMoveBlueIcon}
                 />
-                <Text style={styles.titlecard}>{t('home.training')}</Text>
+                <Text  style={styles.titlecard}>{t('home.training')}</Text>
               </View>
             </TouchableOpacity>
 
@@ -607,7 +607,7 @@ const renderCarouselItem = (item, index) => {
                   source={icons.bussinessIcon}
                   style={styles.RightSideMoveBlueIcon}
                 />
-                <Text style={styles.titlecard}>
+                <Text  numberOfLines={1} style={styles.titlecard}>
                   {t('home.businessPartners')}
                 </Text>
               </View>
@@ -821,6 +821,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter-SemiBold',
     fontSize: responsiveFontSize(1.88),
     color: '#000000',
+    textAlign: 'center',
   },
   viewAllText: {
     fontFamily: 'Inter-Medium',

@@ -17,7 +17,7 @@ const TAB_ICONS = {
   [routes.tab1]: require('../../assets/icons/tab1.png'),
   [routes.SocialTab]: require('../../assets/icons/tab2.png'),
   [routes.MarketPlace]: require('../../assets/icons/tab4.png'),
-  [routes.BlogScreen]: require('../../assets/icons/tab5.png'),
+  [routes.ChatScreen]: require('../../assets/icons/star.png'),
   [routes.Profile]: require('../../assets/icons/tab6.png'), // fallback
 };
 
@@ -89,7 +89,7 @@ console.log('Profile image:', userData?.profile_image);
         </TouchableOpacity>
 
         {renderTab(routes.MarketPlace)}
-        {renderTab(routes.BlogScreen)}
+        {renderTab(routes.ChatScreen)}
         {renderTab(routes.Profile)}
       </View>
     </View>
@@ -109,41 +109,73 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  tabBar: {
-    flexDirection: 'row',
-    backgroundColor: '#754595',
-    width: '94%',
-    height: 60,
-    borderRadius: 30,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 10,
-    elevation: 10,
-  },
+  // tabBar: {
+  //   flexDirection: 'row',
+  //   backgroundColor: '#754595',
+  //   width: '94%',
+  //   height: 60,
+  //   borderRadius: 30,
+  //   alignItems: 'center',
+  //   justifyContent: 'space-between',
+  //   paddingHorizontal: 10,
+  //   elevation: 10,
+  // },
 
-  tabItem: {
-    width: 52,
-    height: 52,
-    borderRadius: 52/2,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  // tabItem: {
+  //   width: 52,
+  //   height: 52,
+  //   borderRadius: 52/2,
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  // },
 
   activeTab: {
     backgroundColor: '#fff',
   },
 
-  icon: {
-    width: 22,
-    height: 22,
-  },
+  // icon: {
+  //   width: 25,
+  //   height: 25,
+  // },
 
-  /** 🔹 Profile image style */
-  profileIcon: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-  },
+  // /** 🔹 Profile image style */
+  // profileIcon: {
+  //   width: 28,
+  //   height: 28,
+  //   borderRadius: 16,
+  // },
+  tabBar: {
+  flexDirection: 'row',
+  backgroundColor: '#754595',
+  width: '94%',
+  height: 60,
+  borderRadius: 30,
+  alignItems: 'center',
+  justifyContent: 'space-around',
+  paddingHorizontal: 6,
+  elevation: 10,
+},
+
+tabItem: {
+  width: 48,
+  height: 48,
+  borderRadius: 24,
+  alignItems: 'center',
+  justifyContent: 'center',
+},
+
+icon: {
+  width: 24,
+  height: 24,
+},
+
+profileIcon: {
+  width: 28,
+  height: 28,
+  borderRadius: 14,
+  overflow: 'hidden',
+},
+
 });
 
 

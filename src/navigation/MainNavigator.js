@@ -60,6 +60,8 @@ import DeleteAccountScreen from '../screens/Profile/DeleteAccountScreen';
 import CompletedRequestScreen from '../screens/RequestsScreen/CompletedRequestScreen';
 import NotificationListScreen from '../screens/NotificationListScreen';
 import UniversalSearchScreen from '../screens/UniversalSearchScreen';
+import ContractMonthScreen from '../screens/ContractMonthScreen';
+import SelllerProfileScreen from '../screens/BottomTabScreen/MarketPlace/SelllerProfileScreen';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -182,6 +184,14 @@ const MainNavigator = () => {
           name={routes.UniversalSearch}
           component={UniversalSearchScreen}
         />
+         <Stack.Screen
+          name={routes.ContractMonth}
+          component={ContractMonthScreen}
+        />
+         <Stack.Screen
+          name={routes.SelllerProfile}
+          component={SelllerProfileScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -232,7 +242,7 @@ const TabNavigator = () => {
       <Tab.Screen name={routes.tab1} component={Home} />
       <Tab.Screen name={routes.SocialTab} component={SocialTab} />
       <Tab.Screen name={routes.MarketPlace} component={MarketPlace} />
-      <Tab.Screen name={routes.BlogScreen} component={BlogScreen} />
+      <Tab.Screen name={routes.ChatScreen} component={ChatScreen} />
       <Tab.Screen name={routes.HelpScreen} component={HelpScreen} />
       <Tab.Screen name={routes.Profile} component={Profile} />
     </Tab.Navigator>

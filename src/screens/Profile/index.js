@@ -104,10 +104,10 @@ const Profile = () => {
             onPress={() => navigate(routes.RequestsScreen)}
           />
 
-          <ProfileCard
-            icon={icons.star}
-            title={t('chat')}
-            onPress={() => navigate(routes.ChatScreen)}
+            <ProfileCard
+            icon={icons.tab5}
+            title={t('Blog')}
+            onPress={() => navigate(routes.MarketPlace)}
           />
 
           <ProfileCard
@@ -133,11 +133,7 @@ const Profile = () => {
             title={t('Community')}
             onPress={() => navigate(routes.MarketPlace)}
           />
-          <ProfileCard
-            icon={icons.tab5}
-            title={t('Blog')}
-            onPress={() => navigate(routes.MarketPlace)}
-          />
+        
           <ProfileCard
             icon={icons.setting}
             title={t('settings.settings')}
@@ -388,8 +384,8 @@ const styles = StyleSheet.create({
   },
 
   rowIcon: { 
-    height: 22,
-    width: 22,
+    height: 28,
+    width: 28,
     tintColor: Colors.primary,
     marginRight: wp(3),
   },

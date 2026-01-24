@@ -30,6 +30,7 @@ import SignUpButton from '../../../../common/SignUpButton';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import Colors from '../../../../helper/Colors';
 import FontFamily from '../../../../helper/FontFamily';
+import FastImage from 'react-native-fast-image';
 
 const numColumns = 2;
 const itemWidth = (deviceWidth - 24) / numColumns; // 24 is the total horizontal padding
@@ -229,7 +230,7 @@ const List = ({isSearchVisible, setIsSearchVisible}) => {
             ItemID: item.id,
           });
         }}>
-        <Image
+        <FastImage
           source={{uri: uploads_url + item?.first_attachment?.file_path}}
           style={styles.image}
         />
@@ -269,7 +270,7 @@ const List = ({isSearchVisible, setIsSearchVisible}) => {
               onPress={() => {
                 setIsCommentSheetOpen(true);
               }}>
-              <Image source={icons.filterIcon} style={styles.filterIcon} />
+              <FastImage source={icons.filterIcon} style={styles.filterIcon} />
             </Pressable>
           </View>
         </View>

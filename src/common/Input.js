@@ -46,7 +46,8 @@ const Input = ({
           onSubmitEditing={onSubmitEditing}
           editable={editable}
           placeholder={placeholderText}
-          placeholderTextColor={Colors.lightPlaceholder}
+            placeholderTextColor="#888"
+         // placeholderTextColor={Colors.lightPlaceholder}
           placeholderStyle={placeholderStyle}
           blurOnSubmit={blurOnSubmit}
           onChangeText={onChangeText}
@@ -81,6 +82,7 @@ const ComponentStyle = StyleSheet.create({
     backgroundColor: Colors.white,
     borderRadius: 10,
     width: '100%',
+     color: '#000', 
   },
   errorText: {
     fontSize: 12,

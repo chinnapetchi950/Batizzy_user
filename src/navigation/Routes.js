@@ -59,5 +59,7 @@ export const routes = {
   DeleteAccountScreen: 'DeleteAccount',
   ChangePasswordScreen: 'ChangePassword',
   NotificationListScreen: 'NotificationListScreen',
-  UniversalSearch:'UniversalSearch'
+  UniversalSearch:'UniversalSearch',
+  ContractMonth:'ContractMonth',
+  SelllerProfile:'SelllerProfile'
 };
